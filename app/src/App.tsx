@@ -158,7 +158,13 @@ function App() {
               <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#1E2A3B] leading-[1.1] mb-6 animate-fade-in-up animation-delay-100">
                 FRESNO'S
                 <br />
-                <span className="text-[#C94A4A]">STRIPING</span>
+                <span className="inline-block overflow-hidden h-[1.1em] align-bottom">
+                  <span className="flex flex-col animate-revolve-up">
+                    <span className="text-[#C94A4A]">STRIPING</span>
+                    <span className="text-[#C94A4A]">SEALCOATING</span>
+                    <span className="text-[#C94A4A]">STRIPING</span>
+                  </span>
+                </span>
                 <br />
                 EXPERTS
               </h1>
@@ -197,7 +203,7 @@ function App() {
                   <div className="font-mono-label text-[#6B7280] text-xs">Projects Complete</div>
                 </div>
                 <div>
-                  <div className="font-display text-3xl lg:text-4xl text-[#C94A4A]">4.9</div>
+                  <div className="font-display text-3xl lg:text-4xl text-[#C94A4A]">5.0</div>
                   <div className="font-mono-label text-[#6B7280] text-xs">Rating Score</div>
                 </div>
               </div>

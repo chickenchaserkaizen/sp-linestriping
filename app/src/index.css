@@ -356,19 +356,24 @@ button {
   animation: marquee 30s linear infinite;
 }
 
-/* Pulse animation for decorative elements */
-@keyframes pulse-soft {
+/* Word revolving animation */
+@keyframes revolveUp {
 
   0%,
-  100% {
-    opacity: 1;
+  40% {
+    transform: translateY(0);
   }
 
-  50% {
-    opacity: 0.7;
+  50%,
+  90% {
+    transform: translateY(-33.333%);
+  }
+
+  100% {
+    transform: translateY(-66.666%);
   }
 }
 
-.animate-pulse-soft {
-  animation: pulse-soft 2s ease-in-out infinite;
+.animate-revolve-up {
+  animation: revolveUp 4s cubic-bezier(0.76, 0, 0.24, 1) infinite;
 }
