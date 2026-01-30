@@ -103,8 +103,8 @@ function App() {
             <button onClick={() => scrollToSection(heroRef)} className="btn-pill-active">Home</button>
             <button onClick={() => scrollToSection(servicesRef)} className="btn-pill">Services</button>
             <button onClick={() => scrollToSection(adaRef)} className="btn-pill">ADA</button>
-            <button onClick={() => scrollToSection(projectsRef)} className="btn-pill">Projects</button>
             <button onClick={() => scrollToSection(testimonialsRef)} className="btn-pill">Reviews</button>
+            <button onClick={() => scrollToSection(projectsRef)} className="btn-pill">Projects</button>
             <button onClick={() => scrollToSection(contactRef)} className="btn-pill">Contact</button>
           </div>
 
@@ -134,8 +134,8 @@ function App() {
             <button onClick={() => scrollToSection(heroRef)} className="btn-pill-active w-full">Home</button>
             <button onClick={() => scrollToSection(servicesRef)} className="btn-pill w-full">Services</button>
             <button onClick={() => scrollToSection(adaRef)} className="btn-pill w-full">ADA Compliance</button>
-            <button onClick={() => scrollToSection(projectsRef)} className="btn-pill w-full">Projects</button>
             <button onClick={() => scrollToSection(testimonialsRef)} className="btn-pill w-full">Reviews</button>
+            <button onClick={() => scrollToSection(projectsRef)} className="btn-pill w-full">Projects</button>
             <button onClick={() => scrollToSection(contactRef)} className="btn-pill w-full">Contact</button>
             <button
               onClick={() => { setIsEstimateOpen(true); setIsMenuOpen(false); }}
@@ -373,58 +373,62 @@ function App() {
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section ref={projectsRef} className="section-flowing bg-[#FAF8F5] relative">
+      {/* Testimonials Section */}
+      <section ref={testimonialsRef} className="section-flowing bg-[#FAF8F5] relative">
         <div className="relative z-10 px-6 lg:px-12 py-12">
           <div className="max-w-7xl mx-auto">
-            <div className="projects-animate flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
-              <div>
-                <div className="inline-flex items-center gap-2 mb-4">
-                  <Scissors className="w-4 h-4 text-[#C94A4A]" />
-                  <span className="font-mono-label text-[#C94A4A]">Our Work</span>
-                </div>
-                <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-[#1E2A3B] mb-4">
-                  Work That Holds
-                  <br />
-                  <span className="text-[#C94A4A]">The Line.</span>
-                </h2>
-                <p className="text-[#6B7280] max-w-xl font-body">
-                  From retail centers to industrial complexes, see our precision work across Fresno and the Central Valley.
-                </p>
+            <div className="testimonials-animate text-center mb-12">
+              <div className="inline-flex items-center gap-2 mb-4">
+                <Star className="w-4 h-4 text-[#C94A4A] fill-[#C94A4A]" />
+                <span className="font-mono-label text-[#C94A4A]">Testimonials</span>
               </div>
-              <button onClick={() => scrollToSection(contactRef)} className="btn-ghost self-start lg:self-auto">
-                View All Projects
-              </button>
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-[#1E2A3B] mb-4">
+                They Notice The <span className="text-[#C94A4A]">Details.</span>
+              </h2>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="projects-animate group relative overflow-hidden rounded-2xl aspect-video card-hover">
-                <img
-                  src="/project-retail.jpg"
-                  alt="Retail center project"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1E2A3B] via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <div className="font-mono-label text-[#C94A4A] mb-2">Fresno, CA</div>
-                  <h3 className="font-display text-xl text-white mb-1">Fresno Retail Center Restripe</h3>
-                  <p className="text-[#9CA3AF] text-sm font-body">Restripe • ADA Markings • Sealcoating</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                {
+                  quote: "S&P - Line Striping and Sealcoating did an excellent job for our gym. Their team was both professional and courteous. They paid great attention to detail, ensuring that all lines were accurately drawn—from beneath the basketball hoop to the free throw lines, and the volleyball court was perfectly centered. Shivam and his brother truly did an outstanding job! I highly recommend them for any indoor or outdoor court striping needs!",
+                  name: "Mitesh Gajjar",
+                  role: "Google Review",
+                  rating: 5
+                },
+                {
+                  quote: "I highly recommend S&P line striping. They are very responsive and easy to work with. They didn't sell us anything we didn't need, were honest and straight to the point. They resealed our entire parking lot, repaired all lines, arrows, accessible parking, curbs and even custom wording. Very happy with the results!",
+                  name: "Eric Stoner",
+                  role: "Google Review",
+                  rating: 5
+                },
+                {
+                  quote: "First and foremost I would like to state how professional this company is when it came to communication and planning. Pricing for striping was extremely reasonable compared to other companies who quoted almost double. The team at S&P Line Striping works fast and does an amazing job. If you're looking for striping for your business this is the company to reach out to!",
+                  name: "Max Lor",
+                  role: "Google Review",
+                  rating: 5
+                },
+              ].map((testimonial, i) => (
+                <div key={i} className="testimonials-animate p-6 bg-white border-2 border-[#E5E7EB] rounded-2xl card-hover">
+                  <div className="flex gap-1 mb-4">
+                    {[...Array(testimonial.rating)].map((_, j) => (
+                      <Star key={j} className="w-4 h-4 text-[#F59E0B] fill-[#F59E0B]" />
+                    ))}
+                  </div>
+                  <p className="text-[#6B7280] mb-6 text-sm leading-relaxed font-body line-clamp-5">"{testimonial.quote}"</p>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-[#C94A4A]/10 flex items-center justify-center">
+                      <span className="font-display text-[#C94A4A] text-sm">{testimonial.name.charAt(0)}</span>
+                    </div>
+                    <div>
+                      <div className="font-display text-lg text-[#1E2A3B]">{testimonial.name}</div>
+                      <div className="text-[#9CA3AF] text-xs font-body flex items-center gap-1">
+                        <svg className="w-3 h-3" viewBox="0 0 24 24" fill="#4285F4"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" /><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" /><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" /><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" /></svg>
+                        {testimonial.role}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-
-              <div className="projects-animate group relative overflow-hidden rounded-2xl aspect-video card-hover">
-                <img
-                  src="/process-paint.jpg"
-                  alt="Line striping in action"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1E2A3B] via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <div className="font-mono-label text-[#C94A4A] mb-2">Clovis, CA</div>
-                  <h3 className="font-display text-xl text-white mb-1">Industrial Park Redesign</h3>
-                  <p className="text-[#9CA3AF] text-sm font-body">Full Layout • Traffic Flow • Safety Markings</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -521,62 +525,58 @@ function App() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section ref={testimonialsRef} className="section-flowing bg-white relative">
+      {/* Projects Section */}
+      <section ref={projectsRef} className="section-flowing bg-white relative">
         <div className="relative z-10 px-6 lg:px-12 py-12">
           <div className="max-w-7xl mx-auto">
-            <div className="testimonials-animate text-center mb-12">
-              <div className="inline-flex items-center gap-2 mb-4">
-                <Star className="w-4 h-4 text-[#C94A4A] fill-[#C94A4A]" />
-                <span className="font-mono-label text-[#C94A4A]">Testimonials</span>
+            <div className="projects-animate flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+              <div>
+                <div className="inline-flex items-center gap-2 mb-4">
+                  <Scissors className="w-4 h-4 text-[#C94A4A]" />
+                  <span className="font-mono-label text-[#C94A4A]">Our Work</span>
+                </div>
+                <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-[#1E2A3B] mb-4">
+                  Work That Holds
+                  <br />
+                  <span className="text-[#C94A4A]">The Line.</span>
+                </h2>
+                <p className="text-[#6B7280] max-w-xl font-body">
+                  From retail centers to industrial complexes, see our precision work across Fresno and the Central Valley.
+                </p>
               </div>
-              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-[#1E2A3B] mb-4">
-                They Notice The <span className="text-[#C94A4A]">Details.</span>
-              </h2>
+              <button onClick={() => scrollToSection(contactRef)} className="btn-ghost self-start lg:self-auto">
+                View All Projects
+              </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                {
-                  quote: "S&P - Line Striping and Sealcoating did an excellent job for our gym. Their team was both professional and courteous. They paid great attention to detail, ensuring that all lines were accurately drawn—from beneath the basketball hoop to the free throw lines, and the volleyball court was perfectly centered. Shivam and his brother truly did an outstanding job! I highly recommend them for any indoor or outdoor court striping needs!",
-                  name: "Mitesh Gajjar",
-                  role: "Google Review",
-                  rating: 5
-                },
-                {
-                  quote: "I highly recommend S&P line striping. They are very responsive and easy to work with. They didn't sell us anything we didn't need, were honest and straight to the point. They resealed our entire parking lot, repaired all lines, arrows, accessible parking, curbs and even custom wording. Very happy with the results!",
-                  name: "Eric Stoner",
-                  role: "Google Review",
-                  rating: 5
-                },
-                {
-                  quote: "First and foremost I would like to state how professional this company is when it came to communication and planning. Pricing for striping was extremely reasonable compared to other companies who quoted almost double. The team at S&P Line Striping works fast and does an amazing job. If you're looking for striping for your business this is the company to reach out to!",
-                  name: "Max Lor",
-                  role: "Google Review",
-                  rating: 5
-                },
-              ].map((testimonial, i) => (
-                <div key={i} className="testimonials-animate p-6 bg-[#FAF8F5] border-2 border-[#E5E7EB] rounded-2xl card-hover">
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(testimonial.rating)].map((_, j) => (
-                      <Star key={j} className="w-4 h-4 text-[#F59E0B] fill-[#F59E0B]" />
-                    ))}
-                  </div>
-                  <p className="text-[#6B7280] mb-6 text-sm leading-relaxed font-body line-clamp-5">"{testimonial.quote}"</p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#C94A4A]/10 flex items-center justify-center">
-                      <span className="font-display text-[#C94A4A] text-sm">{testimonial.name.charAt(0)}</span>
-                    </div>
-                    <div>
-                      <div className="font-display text-lg text-[#1E2A3B]">{testimonial.name}</div>
-                      <div className="text-[#9CA3AF] text-xs font-body flex items-center gap-1">
-                        <svg className="w-3 h-3" viewBox="0 0 24 24" fill="#4285F4"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" /><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" /><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" /><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" /></svg>
-                        {testimonial.role}
-                      </div>
-                    </div>
-                  </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="projects-animate group relative overflow-hidden rounded-2xl aspect-video card-hover">
+                <img
+                  src="/project-retail.jpg"
+                  alt="Retail center project"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1E2A3B] via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="font-mono-label text-[#C94A4A] mb-2">Fresno, CA</div>
+                  <h3 className="font-display text-xl text-white mb-1">Fresno Retail Center Restripe</h3>
+                  <p className="text-[#9CA3AF] text-sm font-body">Restripe • ADA Markings • Sealcoating</p>
                 </div>
-              ))}
+              </div>
+
+              <div className="projects-animate group relative overflow-hidden rounded-2xl aspect-video card-hover">
+                <img
+                  src="/process-paint.jpg"
+                  alt="Line striping in action"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1E2A3B] via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="font-mono-label text-[#C94A4A] mb-2">Clovis, CA</div>
+                  <h3 className="font-display text-xl text-white mb-1">Industrial Park Redesign</h3>
+                  <p className="text-[#9CA3AF] text-sm font-body">Full Layout • Traffic Flow • Safety Markings</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
