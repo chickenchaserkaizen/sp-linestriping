@@ -23,7 +23,6 @@ function App() {
   const [estimateStep, setEstimateStep] = useState(1);
   const heroRef = useRef<HTMLDivElement>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
-  const adaRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
   const processRef = useRef<HTMLDivElement>(null);
   const coverageRef = useRef<HTMLDivElement>(null);
@@ -34,7 +33,6 @@ function App() {
     // Scroll animations for sections
     const sections = [
       { ref: servicesRef, class: '.services-animate' },
-      { ref: adaRef, class: '.ada-animate' },
       { ref: projectsRef, class: '.projects-animate' },
       { ref: processRef, class: '.process-animate' },
       { ref: coverageRef, class: '.coverage-animate' },
@@ -100,7 +98,6 @@ function App() {
           <div className="hidden lg:flex items-center gap-3">
             <button onClick={() => scrollToSection(heroRef)} className="btn-pill-active">Home</button>
             <button onClick={() => scrollToSection(servicesRef)} className="btn-pill">Services</button>
-            <button onClick={() => scrollToSection(adaRef)} className="btn-pill">ADA</button>
             <button onClick={() => scrollToSection(testimonialsRef)} className="btn-pill">Reviews</button>
             <button onClick={() => scrollToSection(projectsRef)} className="btn-pill">Projects</button>
             <button onClick={() => scrollToSection(contactRef)} className="btn-pill">Contact</button>
@@ -131,7 +128,6 @@ function App() {
           <div className="flex flex-col gap-4">
             <button onClick={() => scrollToSection(heroRef)} className="btn-pill-active w-full">Home</button>
             <button onClick={() => scrollToSection(servicesRef)} className="btn-pill w-full">Services</button>
-            <button onClick={() => scrollToSection(adaRef)} className="btn-pill w-full">ADA Compliance</button>
             <button onClick={() => scrollToSection(testimonialsRef)} className="btn-pill w-full">Reviews</button>
             <button onClick={() => scrollToSection(projectsRef)} className="btn-pill w-full">Projects</button>
             <button onClick={() => scrollToSection(contactRef)} className="btn-pill w-full">Contact</button>
@@ -726,7 +722,7 @@ function App() {
 
             {/* Bottom Bar */}
             <div className="pt-8 border-t border-[#1E2A3B] flex flex-col md:flex-row items-center justify-between gap-4">
-              <span className="text-[#6B7280] text-sm font-body">© 2026 S&P Line Striping & Asphalt Sealcoating. All rights reserved.</span>
+              <span className="text-[#6B7280] text-sm font-body">© 2026 S&P Line Striping & Asphalt Sealcoating. All rights reserved. Designed by Polanco Advertising.</span>
               <div className="flex items-center gap-6">
                 <a href="#" className="text-[#6B7280] hover:text-white text-sm transition-colors font-body">Privacy Policy</a>
                 <a href="#" className="text-[#6B7280] hover:text-white text-sm transition-colors font-body">Terms of Service</a>
