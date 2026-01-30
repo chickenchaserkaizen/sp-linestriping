@@ -5,7 +5,7 @@ import {
   Phone, Mail, MapPin, ArrowRight,
   Star, Menu, X,
   ParkingSquare, PaintBucket, Accessibility,
-  Camera, Map, Upload, Send, Scissors, Calendar
+  Camera, Map, Upload, Send, Calendar
 } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -236,7 +236,6 @@ function App() {
           <div className="max-w-7xl mx-auto">
             <div className="services-animate text-center mb-16">
               <div className="inline-flex items-center gap-2 mb-4">
-                <Scissors className="w-4 h-4 text-[#C94A4A]" />
                 <span className="font-mono-label text-[#C94A4A]">Our Services</span>
               </div>
               <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-[#1E2A3B] mb-6">
@@ -308,7 +307,6 @@ function App() {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
               <div className="inline-flex items-center gap-2 mb-4">
-                <Scissors className="w-4 h-4 text-[#C94A4A]" />
                 <span className="font-mono-label text-[#C94A4A]">Before & After</span>
               </div>
               <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-white mb-4">
@@ -394,7 +392,6 @@ function App() {
           <div className="max-w-7xl mx-auto">
             <div className="process-animate text-center mb-16">
               <div className="inline-flex items-center gap-2 mb-4">
-                <Scissors className="w-4 h-4 text-[#C94A4A]" />
                 <span className="font-mono-label text-[#C94A4A]">Our Process</span>
               </div>
               <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-[#1E2A3B] mb-4">
@@ -486,7 +483,6 @@ function App() {
             <div className="projects-animate flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
               <div>
                 <div className="inline-flex items-center gap-2 mb-4">
-                  <Scissors className="w-4 h-4 text-[#C94A4A]" />
                   <span className="font-mono-label text-[#C94A4A]">Our Work</span>
                 </div>
                 <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-[#1E2A3B] mb-4">
@@ -544,7 +540,6 @@ function App() {
               <div className="w-full lg:w-1/2">
                 <div className="contact-animate">
                   <div className="inline-flex items-center gap-2 mb-4">
-                    <Scissors className="w-4 h-4 text-[#C94A4A]" />
                     <span className="font-mono-label text-[#C94A4A]">Get in Touch</span>
                   </div>
                   <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-white mb-4">
