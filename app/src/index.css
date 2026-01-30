@@ -1,0 +1,374 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 30 30% 98%;
+    --foreground: 220 30% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 30% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 30% 15%;
+    --primary: 355 70% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 30 20% 95%;
+    --secondary-foreground: 220 30% 15%;
+    --muted: 30 10% 90%;
+    --muted-foreground: 220 10% 45%;
+    --accent: 220 100% 58%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 30 15% 85%;
+    --input: 30 15% 85%;
+    --ring: 355 70% 45%;
+    --radius: 0.5rem;
+
+    /* Custom brand colors - Light theme */
+    --sp-red: #C94A4A;
+    --sp-coral: #E8725A;
+    --sp-navy: #1E2A3B;
+    --sp-dark-navy: #0F1621;
+    --sp-cream: #FAF8F5;
+    --sp-white: #FFFFFF;
+    --sp-gray: #6B7280;
+    --sp-light-gray: #9CA3AF;
+    --sp-blue: #3B5998;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-[#FAF8F5] text-[#1E2A3B] antialiased;
+    font-family: 'Outfit', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .font-display {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+
+  .font-body {
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-weight: 400;
+  }
+
+  .font-mono-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, var(--sp-navy) 0%, var(--sp-gray) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Hexagonal button styles - pointed ends */
+  .btn-pill {
+    @apply px-8 py-2.5 bg-transparent text-[#1E2A3B] font-semibold text-sm transition-all duration-300 hover:bg-[#1E2A3B] hover:text-white active:scale-95 relative;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+    background-color: transparent;
+    border: none;
+  }
+
+  .btn-pill::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+    background: #1E2A3B;
+    z-index: -1;
+    padding: 2px;
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  .btn-pill:hover::before {
+    background: #1E2A3B;
+    -webkit-mask: none;
+    mask: none;
+  }
+
+  .btn-pill-active {
+    @apply px-8 py-2.5 bg-[#1E2A3B] text-white font-semibold text-sm transition-all duration-300 hover:bg-[#0F1621] active:scale-95;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+  }
+
+  .btn-primary {
+    @apply px-10 py-4 bg-[#C94A4A] text-white font-semibold transition-all duration-300 hover:bg-[#B03D3D] hover:scale-[1.03] hover:shadow-lg active:scale-[0.97];
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(201, 74, 74, 0.3);
+    clip-path: polygon(6% 0%, 94% 0%, 100% 50%, 94% 100%, 6% 100%, 0% 50%);
+  }
+
+  .btn-ghost {
+    @apply px-8 py-3 bg-transparent text-[#1E2A3B] font-semibold relative transition-all duration-300 hover:bg-[#1E2A3B] hover:text-white active:scale-95;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    clip-path: polygon(8% 0%, 92% 0%, 100% 50%, 92% 100%, 8% 100%, 0% 50%);
+  }
+
+  .btn-ghost::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    clip-path: polygon(8% 0%, 92% 0%, 100% 50%, 92% 100%, 8% 100%, 0% 50%);
+    background: #1E2A3B;
+    z-index: -1;
+    padding: 2px;
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  .btn-ghost:hover::before {
+    background: #1E2A3B;
+    -webkit-mask: none;
+    mask: none;
+  }
+
+  /* Decorative dashed line */
+  .dashed-line {
+    border-top: 3px dashed #C94A4A;
+  }
+
+  /* Badge styles */
+  .badge-circle {
+    @apply absolute w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-[#C94A4A] text-white flex flex-col items-center justify-center shadow-lg;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0) rotate(12deg);
+    }
+
+    50% {
+      transform: translateY(-10px) rotate(12deg);
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.8s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.6s ease-out forwards;
+  }
+
+  .section-flowing {
+    @apply relative w-full py-20;
+  }
+
+  /* Hero image overlapping effect */
+  .hero-image-main {
+    @apply relative rounded-lg overflow-hidden shadow-2xl;
+    transform: rotate(-2deg);
+    transition: transform 0.4s ease;
+  }
+
+  .hero-image-main:hover {
+    transform: rotate(-1deg) scale(1.02);
+  }
+
+  .hero-image-secondary {
+    @apply absolute rounded-lg overflow-hidden shadow-xl border-4 border-white;
+    transform: rotate(3deg);
+    transition: transform 0.4s ease;
+  }
+
+  .hero-image-secondary:hover {
+    transform: rotate(2deg) scale(1.03);
+  }
+
+  /* Card hover effects */
+  .card-hover {
+    @apply transition-all duration-300;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(30, 42, 59, 0.1);
+  }
+
+  /* Decorative elements */
+  .scissors-icon {
+    @apply text-[#C94A4A];
+  }
+
+  /* Subtle background pattern */
+  .bg-pattern {
+    background-image:
+      radial-gradient(circle at 25% 25%, rgba(201, 74, 74, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(59, 89, 152, 0.03) 0%, transparent 50%);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+}
+
+/* Custom scrollbar - Light theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAF8F5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C94A4A;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B03D3D;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(201, 74, 74, 0.2);
+  color: #1E2A3B;
+}
+
+/* Smooth transitions for all interactive elements */
+a,
+button {
+  transition: all 0.3s ease;
+}
+
+/* Marquee animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* Pulse animation for decorative elements */
+@keyframes pulse-soft {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
