@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   Phone, Mail, MapPin, ArrowRight,
-  CheckCircle, Star, Menu, X,
+  Star, Menu, X,
   ParkingSquare, PaintBucket, Accessibility,
   Camera, Map, Upload, Send, Scissors, Calendar
 } from 'lucide-react';
@@ -24,7 +24,6 @@ function App() {
   const heroRef = useRef<HTMLDivElement>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
   const adaRef = useRef<HTMLDivElement>(null);
-  const whyRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
   const processRef = useRef<HTMLDivElement>(null);
   const coverageRef = useRef<HTMLDivElement>(null);
@@ -36,7 +35,6 @@ function App() {
     const sections = [
       { ref: servicesRef, class: '.services-animate' },
       { ref: adaRef, class: '.ada-animate' },
-      { ref: whyRef, class: '.why-animate' },
       { ref: projectsRef, class: '.projects-animate' },
       { ref: processRef, class: '.process-animate' },
       { ref: coverageRef, class: '.coverage-animate' },
@@ -307,46 +305,6 @@ function App() {
 
 
 
-      {/* Why S&P Section */}
-      <section ref={whyRef} className="section-flowing bg-white relative">
-        <div className="relative z-10 px-6 lg:px-12 py-12">
-          <div className="max-w-7xl mx-auto">
-            <div className="why-animate text-center mb-16">
-              <div className="inline-flex items-center gap-2 mb-4">
-                <Scissors className="w-4 h-4 text-[#C94A4A]" />
-                <span className="font-mono-label text-[#C94A4A]">Why Choose Us</span>
-              </div>
-              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-[#1E2A3B] mb-4">
-                Local Crew.
-                <br />
-                <span className="text-[#C94A4A]">Proven Process.</span>
-              </h2>
-              <p className="text-[#6B7280] max-w-2xl mx-auto font-body">
-                We're based in Fresno and work across the Central Valley. Our team shows up on time, tapes sharp lines, and cleans up before we leave.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-              {[
-                { title: 'Fast Turnaround', desc: 'Most lots completed in 1 day with minimal disruption to your business.' },
-                { title: 'Premium Materials', desc: 'Traffic paint and thermoplastic options for maximum durability.' },
-                { title: 'Flexible Scheduling', desc: 'After-hours and weekend work to keep your business running.' },
-                { title: 'Satisfaction Guaranteed', desc: '100% satisfaction walkthrough before we invoice.' },
-              ].map((feature, i) => (
-                <div key={i} className="why-animate flex items-start gap-4 p-6 bg-[#FAF8F5] rounded-2xl card-hover border border-[#E5E7EB]">
-                  <div className="w-10 h-10 rounded-full bg-[#C94A4A]/10 flex items-center justify-center flex-shrink-0">
-                    <CheckCircle className="w-5 h-5 text-[#C94A4A]" />
-                  </div>
-                  <div>
-                    <h3 className="font-display text-lg text-[#1E2A3B] mb-1">{feature.title}</h3>
-                    <p className="text-[#6B7280] text-sm font-body">{feature.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Before/After Section */}
       <section className="section-flowing bg-[#1E2A3B] relative">
