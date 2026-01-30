@@ -588,6 +588,20 @@ function App() {
                       <div className="font-semibold text-white">Fresno, CA & Central Valley</div>
                     </div>
                   </div>
+
+                  {/* Google Maps Iframe */}
+                  <div className="mt-8 rounded-2xl overflow-hidden border-2 border-[#1E2A3B] shadow-2xl h-[250px] w-full">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6388.5498442522085!2d-119.700816!3d36.8119315!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80945d075507a6a3%3A0xc510b68fc9bbf152!2sS%26P%20-%20Line%20Striping%20and%20Sealcoating!5e0!3m2!1sen!2sus!4v1769767312762!5m2!1sen!2sus"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="S&P - Line Striping and Sealcoating Location"
+                    ></iframe>
+                  </div>
                 </div>
               </div>
 
