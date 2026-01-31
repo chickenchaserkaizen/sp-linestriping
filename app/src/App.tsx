@@ -4,8 +4,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   Phone, Mail, MapPin, ArrowRight,
   Star, Menu, X,
-  ParkingSquare, PaintBucket, Accessibility,
-  Camera, Map, Upload, Send, Calendar
+  ParkingSquare,
+  Camera, Map, Upload, Send, Calendar,
+  Flame, Signpost, Trophy, Droplet, Wrench, ChevronLeft, ChevronRight, ChevronDown
 } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -17,23 +18,133 @@ import { Toaster } from '@/components/ui/sonner';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Gallery Carousel Component with Instagram-style pagination
+function GalleryCarousel({ title, images, onImageClick }: { title: string; images: string[]; onImageClick: (image: string) => void }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  const itemsVisible = 5; // Number of visible items on desktop
+  const maxIndex = Math.max(0, images.length - itemsVisible);
+
+  const handlePrev = () => setCurrentIndex(prev => Math.max(0, prev - 1));
+  const handleNext = () => setCurrentIndex(prev => Math.min(maxIndex, prev + 1));
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const minSwipeDistance = 50;
+
+    if (distance > minSwipeDistance) {
+      handleNext();
+    } else if (distance < -minSwipeDistance) {
+      handlePrev();
+    }
+    setTouchStart(0);
+    setTouchEnd(0);
+  };
+
+  const getDotClass = (index: number) => {
+    if (index === currentIndex) return 'carousel-dot active';
+    if (Math.abs(index - currentIndex) === 1) return 'carousel-dot adjacent';
+    return 'carousel-dot';
+  };
+
+  return (
+    <div className="mb-12">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="font-display text-xl text-[#1E2A3B]">{title}</h3>
+        <div className="hidden md:flex gap-2">
+          <button
+            onClick={handlePrev}
+            disabled={currentIndex === 0}
+            className="w-10 h-10 rounded-full bg-white border border-[#E5E7EB] flex items-center justify-center text-[#1E2A3B] hover:bg-[#FAF8F5] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+          >
+            <ChevronLeft size={20} />
+          </button>
+          <button
+            onClick={handleNext}
+            disabled={currentIndex >= maxIndex}
+            className="w-10 h-10 rounded-full bg-white border border-[#E5E7EB] flex items-center justify-center text-[#1E2A3B] hover:bg-[#FAF8F5] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+          >
+            <ChevronRight size={20} />
+          </button>
+        </div>
+      </div>
+
+      <div
+        className="gallery-carousel"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        <div
+          ref={trackRef}
+          className="gallery-track"
+          style={{ transform: `translateX(calc(-${currentIndex} * (20% + 3.2px)))` }}
+        >
+          {images.map((image, i) => (
+            <div key={i} className="gallery-slide cursor-pointer" onClick={() => onImageClick(image)}>
+              <img src={image} alt={`${title} project ${i + 1}`} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Dot Pagination */}
+      <div className="carousel-dots">
+        {Array.from({ length: Math.min(images.length, maxIndex + 1) }).map((_, i) => (
+          <button
+            key={i}
+            className={getDotClass(i)}
+            onClick={() => setCurrentIndex(i)}
+            aria-label={`Go to slide ${i + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isEstimateOpen, setIsEstimateOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
   const [estimateStep, setEstimateStep] = useState(1);
+  const [scrolledPastHero, setScrolledPastHero] = useState(false);
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+
   const heroRef = useRef<HTMLDivElement>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
-  const projectsRef = useRef<HTMLDivElement>(null);
   const processRef = useRef<HTMLDivElement>(null);
   const coverageRef = useRef<HTMLDivElement>(null);
   const testimonialsRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Scroll detection for navbar
+    const handleScroll = () => {
+      if (heroRef.current) {
+        const heroHeight = heroRef.current.offsetHeight;
+        setScrolledPastHero(window.scrollY > heroHeight - 88); // 88 is nav height
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
     // Scroll animations for sections
     const sections = [
       { ref: servicesRef, class: '.services-animate' },
-      { ref: projectsRef, class: '.projects-animate' },
       { ref: processRef, class: '.process-animate' },
       { ref: coverageRef, class: '.coverage-animate' },
       { ref: testimonialsRef, class: '.testimonials-animate' },
@@ -61,6 +172,7 @@ function App() {
     });
 
     return () => {
+      window.removeEventListener('scroll', handleScroll);
       ScrollTrigger.getAll().forEach(st => st.kill());
     };
   }, []);
@@ -68,6 +180,23 @@ function App() {
   const scrollToSection = (ref: React.RefObject<HTMLDivElement | null>) => {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
     setIsMenuOpen(false);
+    setIsMobileServicesOpen(false);
+  };
+
+  const scrollToId = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const navHeight = 88; // Height of the fixed header
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+    setIsMenuOpen(false);
+    setIsMobileServicesOpen(false);
   };
 
   const handleEstimateSubmit = (e: React.FormEvent) => {
@@ -81,25 +210,63 @@ function App() {
     <div className="min-h-screen bg-[#FAF8F5]">
       <Toaster position="top-center" richColors />
 
+      {/* Lightbox for Gallery */}
+      <Dialog open={!!lightboxImage} onOpenChange={() => setLightboxImage(null)}>
+        <DialogContent className="max-w-[95vw] max-h-[90vh] p-0 overflow-hidden bg-transparent border-none">
+          <div className="relative w-full h-full flex items-center justify-center">
+            {lightboxImage && (
+              <img
+                src={lightboxImage}
+                alt="Gallery Preview"
+                className="max-w-full max-h-[85vh] object-contain rounded-lg"
+              />
+            )}
+            <button
+              onClick={() => setLightboxImage(null)}
+              className="absolute -top-12 right-0 p-2 text-white hover:text-[#C94A4A] transition-colors"
+            >
+              <X size={32} />
+            </button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 px-6 lg:px-12 py-4 bg-[#FAF8F5]/95 backdrop-blur-sm">
+      <nav className={`fixed top-0 left-0 right-0 z-50 px-6 lg:px-12 py-4 transition-all duration-500 ${scrolledPastHero ? 'bg-transparent backdrop-blur-0' : 'bg-[#FAF8F5]/95 backdrop-blur-sm'}`}>
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
+          {/* Logo with Slogan and License */}
+          <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
               <img src="/logo.png" alt="S&P Striping Logo" className="h-10 w-auto" />
-              <span className="font-display text-xl text-[#1E2A3B]">
-                S&P <span className="text-[#C94A4A]">STRIPING</span>
-              </span>
+              <div className="flex flex-col">
+                <span className="font-display text-xl text-[#1E2A3B]">
+                  S&P <span className="text-[#C94A4A]">STRIPING</span>
+                </span>
+                <span className="text-[10px] text-[#6B7280] hidden sm:block">License #1142328</span>
+              </div>
             </div>
           </div>
 
           {/* Desktop Nav Links */}
           <div className="hidden lg:flex items-center gap-3">
             <button onClick={() => scrollToSection(heroRef)} className="btn-pill-active">Home</button>
-            <button onClick={() => scrollToSection(servicesRef)} className="btn-pill">Services</button>
+            <div
+              className="relative"
+              onMouseEnter={() => setIsServicesOpen(true)}
+              onMouseLeave={() => setIsServicesOpen(false)}
+            >
+              <button onClick={() => scrollToSection(servicesRef)} className="btn-pill">Services</button>
+              <div className={`services-dropdown ${isServicesOpen ? 'show' : ''}`}>
+                <button className="services-dropdown-item" onClick={() => scrollToId('service-line-striping')}>Line Striping</button>
+                <button className="services-dropdown-item" onClick={() => scrollToId('service-ada-fire-compliance')}>ADA + Fire Compliance</button>
+                <button className="services-dropdown-item" onClick={() => scrollToId('service-signage')}>Signage</button>
+                <button className="services-dropdown-item" onClick={() => scrollToId('service-recreational-courts')}>Recreational Courts</button>
+                <button className="services-dropdown-item" onClick={() => scrollToId('service-seal-coating')}>Seal Coating</button>
+                <button className="services-dropdown-item" onClick={() => scrollToId('service-crack-filling')}>Crack Filling</button>
+              </div>
+            </div>
             <button onClick={() => scrollToSection(testimonialsRef)} className="btn-pill">Reviews</button>
-            <button onClick={() => scrollToSection(projectsRef)} className="btn-pill">Projects</button>
+            <button onClick={() => scrollToId('our-work')} className="btn-pill">Our Work</button>
             <button onClick={() => scrollToSection(contactRef)} className="btn-pill">Contact</button>
           </div>
 
@@ -124,12 +291,28 @@ function App() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-[#FAF8F5] pt-20 px-6 lg:hidden">
-          <div className="flex flex-col gap-4">
+        <div className="fixed inset-0 z-40 bg-[#FAF8F5] pt-20 px-6 lg:hidden overflow-y-auto">
+          <div className="flex flex-col gap-4 pb-8">
             <button onClick={() => scrollToSection(heroRef)} className="btn-pill-active w-full">Home</button>
-            <button onClick={() => scrollToSection(servicesRef)} className="btn-pill w-full">Services</button>
+            <button
+              onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
+              className="btn-pill w-full flex items-center justify-between"
+            >
+              Services
+              <ChevronDown size={20} className={`transition-transform duration-300 ${isMobileServicesOpen ? 'rotate-180' : ''}`} />
+            </button>
+            {isMobileServicesOpen && (
+              <div className="pl-4 flex flex-col gap-2 animate-fade-in">
+                <button onClick={() => scrollToId('service-line-striping')} className="text-left text-sm text-[#6B7280] hover:text-[#C94A4A] py-2">Line Striping</button>
+                <button onClick={() => scrollToId('service-ada-fire-compliance')} className="text-left text-sm text-[#6B7280] hover:text-[#C94A4A] py-2">ADA + Fire Compliance</button>
+                <button onClick={() => scrollToId('service-signage')} className="text-left text-sm text-[#6B7280] hover:text-[#C94A4A] py-2">Signage</button>
+                <button onClick={() => scrollToId('service-recreational-courts')} className="text-left text-sm text-[#6B7280] hover:text-[#C94A4A] py-2">Recreational Courts</button>
+                <button onClick={() => scrollToId('service-seal-coating')} className="text-left text-sm text-[#6B7280] hover:text-[#C94A4A] py-2">Seal Coating</button>
+                <button onClick={() => scrollToId('service-crack-filling')} className="text-left text-sm text-[#6B7280] hover:text-[#C94A4A] py-2">Crack Filling</button>
+              </div>
+            )}
             <button onClick={() => scrollToSection(testimonialsRef)} className="btn-pill w-full">Reviews</button>
-            <button onClick={() => scrollToSection(projectsRef)} className="btn-pill w-full">Projects</button>
+            <button onClick={() => scrollToId('our-work')} className="btn-pill w-full">Our Work</button>
             <button onClick={() => scrollToSection(contactRef)} className="btn-pill w-full">Contact</button>
             <button
               onClick={() => { setIsEstimateOpen(true); setIsMenuOpen(false); }}
@@ -141,95 +324,77 @@ function App() {
         </div>
       )}
 
-      {/* Hero Section - Split layout with overlapping images */}
-      <section ref={heroRef} className="relative min-h-screen pt-24 pb-16 overflow-hidden bg-pattern">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
-            {/* Left Content */}
-            <div className="w-full lg:w-1/2 pt-8 lg:pt-16">
-              {/* Tag line badge */}
-              <div className="inline-flex items-center gap-2 mb-6 animate-fade-in-up">
-                <span className="font-mono-label text-[#C94A4A] tracking-wider">
-                  PRECISION PAVEMENT MARKING
+      {/* Hero Section - Full-width video background */}
+      <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden picket-lines">
+        {/* Background Video */}
+        <video
+          src="/spstriping_recreational hero video 1.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="hero-video-bg"
+        />
+        <div className="hero-video-overlay" />
+
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-24 lg:pt-48 lg:pb-32">
+          <div className="max-w-2xl">
+            {/* Main Heading */}
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-[1.1] mb-6 animate-fade-in-up">
+              FRESNO'S
+              <br />
+              <span className="inline-block overflow-hidden h-[1.1em] align-bottom">
+                <span className="flex flex-col animate-revolve-up">
+                  <span className="text-[#C94A4A]">STRIPING</span>
+                  <span className="text-[#C94A4A]">SEALCOATING</span>
+                  <span className="text-[#C94A4A]">STRIPING</span>
                 </span>
-              </div>
+              </span>
+              <br />
+              EXPERTS
+            </h1>
 
-              {/* Main Heading */}
-              <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#1E2A3B] leading-[1.1] mb-6 animate-fade-in-up animation-delay-100">
-                FRESNO'S
-                <br />
-                <span className="inline-block overflow-hidden h-[1.1em] align-bottom">
-                  <span className="flex flex-col animate-revolve-up">
-                    <span className="text-[#C94A4A]">STRIPING</span>
-                    <span className="text-[#C94A4A]">SEALCOATING</span>
-                    <span className="text-[#C94A4A]">STRIPING</span>
-                  </span>
-                </span>
-                <br />
-                EXPERTS
-              </h1>
-
-              {/* Decorative dashed line */}
-              <div className="w-48 dashed-line mb-6 animate-fade-in-up animation-delay-200"></div>
-
-              {/* Subtitle */}
-              <p className="text-[#6B7280] text-lg max-w-md mb-8 animate-fade-in-up animation-delay-300 font-body">
-                Where precision meets durability. Professional line striping,
-                sealcoating, and ADA-compliant markings for the Central Valley.
-              </p>
-
-              {/* CTA Buttons */}
-              <div className="flex flex-wrap gap-4 mb-12 animate-fade-in-up animation-delay-400">
-                <button
-                  onClick={() => setIsEstimateOpen(true)}
-                  className="btn-primary flex items-center gap-2"
-                >
-                  <Calendar size={18} />
-                  Book Appointment
-                </button>
-                <button onClick={() => scrollToSection(servicesRef)} className="btn-ghost">
-                  View Services
-                </button>
-              </div>
-
-              {/* Stats */}
-              <div className="flex gap-8 lg:gap-12 animate-fade-in-up animation-delay-500">
-                <div>
-                  <div className="font-display text-3xl lg:text-4xl text-[#C94A4A]">12+</div>
-                  <div className="font-mono-label text-[#6B7280] text-xs">Years Experience</div>
-                </div>
-                <div>
-                  <div className="font-display text-3xl lg:text-4xl text-[#C94A4A]">2.4K+</div>
-                  <div className="font-mono-label text-[#6B7280] text-xs">Projects Complete</div>
-                </div>
-                <div>
-                  <div className="font-display text-3xl lg:text-4xl text-[#C94A4A]">5.0</div>
-                  <div className="font-mono-label text-[#6B7280] text-xs">Rating Score</div>
-                </div>
-              </div>
+            {/* Slogan - moved here and changed to white */}
+            <div className="mb-8 animate-fade-in-up animation-delay-100">
+              <span className="font-mono-label text-white tracking-wider">
+                QUALITY SERVICE FOR YOUR QUALITY BUSINESS
+              </span>
             </div>
 
-            {/* Right Content - Overlapping Images */}
-            <div className="w-full lg:w-1/2 relative min-h-[400px] lg:min-h-[600px]">
-              {/* Main Video */}
-              <div className="hero-image-main w-[85%] aspect-[4/5] ml-auto animate-slide-in-right">
-                <video
-                  src="/Dolly_tracking_shot slomo 9x16.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover"
-                />
-              </div>
+            {/* Subtitle */}
+            <p className="text-[#9CA3AF] text-lg max-w-md mb-8 animate-fade-in-up animation-delay-200 font-body">
+              Where precision meets durability. Professional line striping,
+              sealcoating, and ADA-compliant markings for the Central Valley.
+            </p>
 
-              {/* Secondary overlapping image */}
-              <div className="hero-image-secondary w-[55%] aspect-[4/3] -left-4 lg:left-0 bottom-12 animate-slide-in-right animation-delay-200">
-                <img
-                  src="/ss1.png"
-                  alt="Striping work in progress"
-                  className="w-full h-full object-cover"
-                />
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap gap-4 mb-12 animate-fade-in-up animation-delay-300">
+              <button
+                onClick={() => setIsEstimateOpen(true)}
+                className="btn-primary flex items-center gap-2"
+              >
+                <Calendar size={18} />
+                Book Appointment
+              </button>
+              <button onClick={() => scrollToId('our-work')} className="px-8 py-3 bg-white/10 backdrop-blur-sm text-white font-semibold relative transition-all duration-300 hover:bg-white/20 active:scale-95 rounded-lg border border-white/20">
+                See Our Work
+              </button>
+            </div>
+
+            {/* Stats */}
+            <div className="flex gap-8 lg:gap-12 animate-fade-in-up animation-delay-500">
+              <div>
+                <div className="font-display text-3xl lg:text-4xl text-[#C94A4A]">12+</div>
+                <div className="font-mono-label text-[#9CA3AF] text-xs">Years Experience</div>
+              </div>
+              <div>
+                <div className="font-display text-3xl lg:text-4xl text-[#C94A4A]">2.4K+</div>
+                <div className="font-mono-label text-[#9CA3AF] text-xs">Projects Complete</div>
+              </div>
+              <div>
+                <div className="font-display text-3xl lg:text-4xl text-[#C94A4A]">5.0</div>
+                <div className="font-mono-label text-[#9CA3AF] text-xs">Rating Score</div>
               </div>
             </div>
           </div>
@@ -254,28 +419,56 @@ function App() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               {[
                 {
+                  id: 'service-line-striping',
                   icon: ParkingSquare,
-                  title: 'Parking Lot Striping',
+                  title: 'Line Striping',
                   desc: 'Fresh, crisp lines that define your space and direct traffic flow with precision.',
-                  image: '/ss3.png'
+                  image: '/ss3.jpg'
                 },
                 {
-                  icon: PaintBucket,
-                  title: 'Sealcoating',
+                  id: 'service-ada-fire-compliance',
+                  icon: Flame,
+                  title: 'ADA + Fire Compliance',
+                  desc: 'Full compliance with ADA and fire lane standards for accessible, safe parking.',
+                  image: '/ss5.jpg'
+                },
+                {
+                  id: 'service-signage',
+                  icon: Signpost,
+                  title: 'Signage',
+                  desc: 'Professional pavement markings, directional arrows, and custom stencils.',
+                  image: '/ss4.jpg'
+                },
+                {
+                  id: 'service-recreational-courts',
+                  icon: Trophy,
+                  title: 'Recreational Courts',
+                  desc: 'Basketball, tennis, pickleball—precision court striping for sports facilities.',
+                  image: '/ss1.jpg'
+                },
+                {
+                  id: 'service-seal-coating',
+                  icon: Droplet,
+                  title: 'Seal Coating',
                   desc: 'Protective coating that extends pavement life and restores that like-new black finish.',
-                  image: '/ss4.png'
+                  image: '/ss6.jpg'
                 },
                 {
-                  icon: Accessibility,
-                  title: 'ADA Markings',
-                  desc: 'Full compliance with current ADA standards for accessible parking and pathways.',
-                  image: '/ss5.png'
+                  id: 'service-crack-filling',
+                  icon: Wrench,
+                  title: 'Crack Filling',
+                  desc: 'Stop cracks before they spread. Hot-pour crack sealing for lasting repairs.',
+                  image: '/ss2.jpg'
                 },
               ].map((service, i) => (
-                <div key={i} className="services-animate group card-hover bg-[#FAF8F5] border border-[#E5E7EB] rounded-2xl overflow-hidden">
+                <div
+                  key={i}
+                  className="services-animate group card-hover bg-[#FAF8F5] border border-[#E5E7EB] rounded-2xl overflow-hidden cursor-pointer"
+                  onClick={() => scrollToId(service.id)}
+                >
                   <div className="aspect-video overflow-hidden">
                     <img
                       src={service.image}
@@ -288,7 +481,7 @@ function App() {
                       <div className="w-10 h-10 rounded-full bg-[#C94A4A]/10 flex items-center justify-center">
                         <service.icon className="w-5 h-5 text-[#C94A4A]" />
                       </div>
-                      <h3 className="font-display text-lg text-[#1E2A3B]">{service.title}</h3>
+                      <h3 className="font-display text-lg text-[#1E2A3B] group-hover:text-[#C94A4A] transition-colors">{service.title}</h3>
                     </div>
                     <p className="text-[#6B7280] text-sm font-body">{service.desc}</p>
                   </div>
@@ -298,41 +491,14 @@ function App() {
 
             <div className="services-animate flex flex-wrap justify-center gap-4 mt-12">
               <button onClick={() => scrollToSection(contactRef)} className="btn-primary">Get a Quote</button>
-              <button onClick={() => scrollToSection(projectsRef)} className="btn-ghost">See Our Work</button>
+              <button onClick={() => scrollToId('our-work')} className="btn-ghost">See Our Work</button>
             </div>
           </div>
         </div>
       </section>
 
-
-
-
-      {/* Before/After Section */}
-      <section className="section-flowing bg-[#1E2A3B] relative">
-        <div className="relative z-10 px-6 lg:px-12 py-12">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-2 mb-4">
-                <span className="font-mono-label text-[#C94A4A]">Before & After</span>
-              </div>
-              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-white mb-4">
-                See The <span className="text-[#C94A4A]">Transformation</span>
-              </h2>
-              <p className="text-[#9CA3AF] max-w-2xl mx-auto font-body">
-                Drag to see the difference professional sealcoating and striping makes.
-              </p>
-            </div>
-
-            <BeforeAfterSlider
-              beforeImage="/before-sealcoat.jpg"
-              afterImage="/after-sealcoat.jpg"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section ref={testimonialsRef} className="section-flowing bg-[#FAF8F5] relative">
+      {/* Testimonials Section - Moved here and made dark */}
+      <section ref={testimonialsRef} className="section-flowing bg-[#1E2A3B] relative">
         <div className="relative z-10 px-6 lg:px-12 py-12">
           <div className="max-w-7xl mx-auto">
             <div className="testimonials-animate text-center mb-12">
@@ -340,7 +506,7 @@ function App() {
                 <Star className="w-4 h-4 text-[#C94A4A] fill-[#C94A4A]" />
                 <span className="font-mono-label text-[#C94A4A]">Testimonials</span>
               </div>
-              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-[#1E2A3B] mb-4">
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-white mb-4">
                 They Notice The <span className="text-[#C94A4A]">Details.</span>
               </h2>
             </div>
@@ -366,7 +532,7 @@ function App() {
                   rating: 5
                 },
               ].map((testimonial, i) => (
-                <div key={i} className="testimonials-animate p-6 bg-white border-2 border-[#E5E7EB] rounded-2xl card-hover">
+                <div key={i} className="testimonials-animate p-6 bg-white border-2 border-[#1E2A3B] rounded-2xl card-hover">
                   <div className="flex gap-1 mb-4">
                     {[...Array(testimonial.rating)].map((_, j) => (
                       <Star key={j} className="w-4 h-4 text-[#F59E0B] fill-[#F59E0B]" />
@@ -388,6 +554,44 @@ function App() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery Section - Now "Our Work" */}
+      <section id="our-work" className="section-flowing bg-[#FAF8F5] relative scroll-mt-24">
+        <div className="relative z-10 px-6 lg:px-12 py-12">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 mb-4">
+                <Camera className="w-4 h-4 text-[#C94A4A]" />
+                <span className="font-mono-label text-[#C94A4A]">Our Work</span>
+              </div>
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-[#1E2A3B] mb-4">
+                Project <span className="text-[#C94A4A]">Gallery</span>
+              </h2>
+              <p className="text-[#6B7280] max-w-2xl mx-auto font-body">
+                Browse our recent projects across different service categories.
+              </p>
+            </div>
+
+            {/* Gallery Rows */}
+            {[
+              { id: 'service-line-striping', title: 'Line Striping', images: ['/ss1.jpg', '/ss2.jpg', '/ss3.jpg', '/ss4.jpg', '/ss5.jpg', '/ss6.jpg', '/ss7.jpg'] },
+              { id: 'service-ada-fire-compliance', title: 'ADA + Fire Signage', images: ['/ss8.jpg', '/ss9.jpg', '/ss10.jpg', '/ss11.jpg', '/ss12.jpg', '/IMG_0406.jpg', '/IMG_0407.jpg'] },
+              { id: 'service-signage', title: 'Signage & Markings', images: ['/ss4.jpg', '/ss8.jpg', '/ss9.jpg', '/ss10.jpg', '/ss11.jpg', '/IMG_0406.jpg', '/IMG_0407.jpg'] },
+              { id: 'service-recreational-courts', title: 'Recreational Courts', images: ['/IMG_0412.jpg', '/IMG_0413.jpg', '/IMG_0490.jpg', '/IMG_1246.jpg', '/IMG_1400.jpg', '/IMG_1748.jpg', '/IMG_1755.jpg'] },
+              { id: 'service-seal-coating', title: 'Seal Coating', images: ['/ss13.jpg', '/ss14.jpg', '/ss15.jpg', '/ss16.jpg', '/ss17.jpg', '/IMG_1926.jpg', '/IMG_3082.jpg'] },
+              { id: 'service-crack-filling', title: 'Crack Filling', images: ['/ss2.jpg', '/ss6.jpg', '/ss13.jpg', '/ss14.jpg', '/IMG_1926.jpg', '/IMG_3082.jpg'] },
+            ].map((category, categoryIndex) => (
+              <div key={categoryIndex} id={category.id} className="scroll-mt-24">
+                <GalleryCarousel
+                  title={category.title}
+                  images={category.images}
+                  onImageClick={(image) => setLightboxImage(image)}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -482,61 +686,7 @@ function App() {
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section ref={projectsRef} className="section-flowing bg-white relative">
-        <div className="relative z-10 px-6 lg:px-12 py-12">
-          <div className="max-w-7xl mx-auto">
-            <div className="projects-animate flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
-              <div>
-                <div className="inline-flex items-center gap-2 mb-4">
-                  <span className="font-mono-label text-[#C94A4A]">Our Work</span>
-                </div>
-                <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-[#1E2A3B] mb-4">
-                  Work That Holds
-                  <br />
-                  <span className="text-[#C94A4A]">The Line.</span>
-                </h2>
-                <p className="text-[#6B7280] max-w-xl font-body">
-                  From retail centers to industrial complexes, see our precision work across Fresno and the Central Valley.
-                </p>
-              </div>
-              <button onClick={() => scrollToSection(contactRef)} className="btn-ghost self-start lg:self-auto">
-                View All Projects
-              </button>
-            </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="projects-animate group relative overflow-hidden rounded-2xl aspect-video card-hover">
-                <img
-                  src="/project-retail.jpg"
-                  alt="Retail center project"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1E2A3B] via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <div className="font-mono-label text-[#C94A4A] mb-2">Fresno, CA</div>
-                  <h3 className="font-display text-xl text-white mb-1">Fresno Retail Center Restripe</h3>
-                  <p className="text-[#9CA3AF] text-sm font-body">Restripe • ADA Markings • Sealcoating</p>
-                </div>
-              </div>
-
-              <div className="projects-animate group relative overflow-hidden rounded-2xl aspect-video card-hover">
-                <img
-                  src="/process-paint.jpg"
-                  alt="Line striping in action"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1E2A3B] via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <div className="font-mono-label text-[#C94A4A] mb-2">Clovis, CA</div>
-                  <h3 className="font-display text-xl text-white mb-1">Industrial Park Redesign</h3>
-                  <p className="text-[#9CA3AF] text-sm font-body">Full Layout • Traffic Flow • Safety Markings</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Contact Section */}
       <section ref={contactRef} className="section-flowing bg-[#1E2A3B] relative">
@@ -553,10 +703,15 @@ function App() {
                     <br />
                     <span className="text-[#C94A4A]">Estimate.</span>
                   </h2>
-                  <p className="text-[#9CA3AF] mb-8 font-body">
+                  <p className="text-[#9CA3AF] mb-4 font-body">
                     Tell us what you need—striping, sealcoating, ADA updates, or a full restripe.
                     We'll reply within one business day.
                   </p>
+                  <div className="flex flex-col gap-1 mb-8">
+                    <span className="font-mono-label text-xs text-[#C94A4A]">Owners</span>
+                    <h3 className="font-display text-2xl text-white">Paarth Patel & Shivam Patel</h3>
+                    <span className="text-[#9CA3AF] text-sm font-body">Contractors License #1142328</span>
+                  </div>
                 </div>
 
                 <div className="contact-animate space-y-4 mb-8">
@@ -570,13 +725,13 @@ function App() {
                     </div>
                   </a>
 
-                  <a href="mailto:hello@spstriping.com" className="flex items-center gap-4 text-[#9CA3AF] hover:text-white transition-colors group">
+                  <a href="mailto:spstripingfresno@gmail.com" className="flex items-center gap-4 text-[#9CA3AF] hover:text-white transition-colors group">
                     <div className="w-12 h-12 bg-[#3B5998]/20 rounded-full flex items-center justify-center group-hover:bg-[#3B5998]/30 transition-colors">
                       <Mail className="w-5 h-5 text-[#3B5998]" />
                     </div>
                     <div>
                       <div className="font-mono-label text-xs mb-1">Email</div>
-                      <div className="font-semibold text-white">hello@spstriping.com</div>
+                      <div className="font-semibold text-white">spstripingfresno@gmail.com</div>
                     </div>
                   </a>
 
@@ -590,24 +745,23 @@ function App() {
                     </div>
                   </div>
 
-                  {/* Google Maps Iframe */}
-                  <div className="mt-8 rounded-2xl overflow-hidden border-2 border-[#1E2A3B] shadow-2xl h-[250px] w-full">
-                    <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6388.5498442522085!2d-119.700816!3d36.8119315!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80945d075507a6a3%3A0xc510b68fc9bbf152!2sS%26P%20-%20Line%20Striping%20and%20Sealcoating!5e0!3m2!1sen!2sus!4v1769767312762!5m2!1sen!2sus"
-                      width="100%"
-                      height="100%"
-                      style={{ border: 0 }}
-                      allowFullScreen
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      title="S&P - Line Striping and Sealcoating Location"
-                    ></iframe>
+                  {/* Social Media Presence */}
+                  <div className="mt-8">
+                    <p className="font-mono-label text-xs text-[#C94A4A] mb-4">Follow us on Social Media</p>
+                    <div className="flex gap-4">
+                      <a href="https://www.tiktok.com/@spstriping" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-[#1E2A3B] rounded-full flex items-center justify-center text-[#9CA3AF] hover:text-white hover:bg-[#000000] transition-all">
+                        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.89 2.89 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" /></svg>
+                      </a>
+                      <a href="https://www.youtube.com/@spstriping" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-[#1E2A3B] rounded-full flex items-center justify-center text-[#9CA3AF] hover:text-white hover:bg-[#FF0000] transition-all">
+                        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
 
               <div className="contact-animate w-full lg:w-1/2">
-                <form onSubmit={handleEstimateSubmit} className="p-6 lg:p-8 bg-white border-2 border-[#E5E7EB] rounded-2xl">
+                <form onSubmit={handleEstimateSubmit} className="p-6 lg:p-8 bg-white border-2 border-[#E5E7EB] rounded-2xl mb-8">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                     <div>
                       <Label className="text-[#6B7280] text-sm mb-2 block font-body">Name</Label>
@@ -653,6 +807,20 @@ function App() {
                     Send Request
                   </button>
                 </form>
+
+                {/* Google Maps Iframe - Moved below form */}
+                <div className="rounded-2xl overflow-hidden border-2 border-[#E5E7EB] shadow-2xl h-[300px] w-full bg-white">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6388.5498442522085!2d-119.700816!3d36.8119315!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80945d075507a6a3%3A0xc510b68fc9bbf152!2sS%26P%20-%20Line%20Striping%20and%20Sealcoating!5e0!3m2!1sen!2sus!4v1769767312762!5m2!1sen!2sus"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="S&P - Line Striping and Sealcoating Location"
+                  ></iframe>
+                </div>
               </div>
             </div>
           </div>
@@ -676,16 +844,17 @@ function App() {
                   Professional line striping and sealcoating services for the Central Valley since 2012. Quality work, honest pricing.
                 </p>
                 <div className="flex gap-3">
-                  <a href="https://www.facebook.com/profile.php?id=100087929498270" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#1E2A3B] flex items-center justify-center text-[#9CA3AF] hover:text-white hover:bg-[#3B5998] transition-all">
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>
+                  <a href="https://www.tiktok.com/@spstriping" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#1E2A3B] flex items-center justify-center text-[#9CA3AF] hover:text-white hover:bg-[#000000] transition-all">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" /></svg>
                   </a>
-                  <a href="https://www.instagram.com/sandpstriping/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#1E2A3B] flex items-center justify-center text-[#9CA3AF] hover:text-white hover:bg-gradient-to-br hover:from-[#833AB4] hover:via-[#FD1D1D] hover:to-[#F77737] transition-all">
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" /></svg>
+                  <a href="https://www.youtube.com/@spstriping" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#1E2A3B] flex items-center justify-center text-[#9CA3AF] hover:text-white hover:bg-[#FF0000] transition-all">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
                   </a>
                   <a href="https://maps.app.goo.gl/pYWJaN4FPzTqFEpj9" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#1E2A3B] flex items-center justify-center text-[#9CA3AF] hover:text-white hover:bg-[#4285F4] transition-all">
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" /><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" /><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" /><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" /></svg>
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" /><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" /><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" /><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" /></svg>
                   </a>
                 </div>
+                <p className="text-[#6B7280] text-xs mt-4">Follow us on Social Media</p>
               </div>
 
               {/* Quick Links */}
@@ -694,7 +863,7 @@ function App() {
                 <ul className="space-y-3">
                   <li><button onClick={() => scrollToSection(heroRef)} className="text-[#9CA3AF] hover:text-white text-sm transition-colors font-body">Home</button></li>
                   <li><button onClick={() => scrollToSection(servicesRef)} className="text-[#9CA3AF] hover:text-white text-sm transition-colors font-body">Services</button></li>
-                  <li><button onClick={() => scrollToSection(projectsRef)} className="text-[#9CA3AF] hover:text-white text-sm transition-colors font-body">Our Work</button></li>
+                  <li><button onClick={() => scrollToId('our-work')} className="text-[#9CA3AF] hover:text-white text-sm transition-colors font-body">Our Work</button></li>
                   <li><button onClick={() => scrollToSection(processRef)} className="text-[#9CA3AF] hover:text-white text-sm transition-colors font-body">Our Process</button></li>
                   <li><button onClick={() => scrollToSection(testimonialsRef)} className="text-[#9CA3AF] hover:text-white text-sm transition-colors font-body">Reviews</button></li>
                   <li><button onClick={() => scrollToSection(contactRef)} className="text-[#9CA3AF] hover:text-white text-sm transition-colors font-body">Contact</button></li>
@@ -715,7 +884,10 @@ function App() {
                   </li>
                   <li className="flex items-center gap-3">
                     <Mail className="w-4 h-4 text-[#C94A4A] flex-shrink-0" />
-                    <a href="mailto:hello@spstriping.com" className="text-[#9CA3AF] hover:text-white text-sm transition-colors font-body">hello@spstriping.com</a>
+                    <a href="mailto:spstripingfresno@gmail.com" className="text-[#9CA3AF] hover:text-white text-sm transition-colors font-body">spstripingfresno@gmail.com</a>
+                  </li>
+                  <li className="flex items-center gap-3 pt-2">
+                    <span className="text-[#6B7280] text-xs font-body">License #1142328</span>
                   </li>
                 </ul>
               </div>
@@ -737,7 +909,7 @@ function App() {
 
             {/* Bottom Bar */}
             <div className="pt-8 border-t border-[#1E2A3B] flex flex-col md:flex-row items-center justify-between gap-4">
-              <span className="text-[#6B7280] text-sm font-body">© 2026 S&P Line Striping & Asphalt Sealcoating. All rights reserved. Designed by Polanco Advertising.</span>
+              <span className="text-[#6B7280] text-sm font-body">© 2026 S&P Line Striping & Asphalt Sealcoating. All rights reserved.</span>
               <div className="flex items-center gap-6">
                 <a href="#" className="text-[#6B7280] hover:text-white text-sm transition-colors font-body">Privacy Policy</a>
                 <a href="#" className="text-[#6B7280] hover:text-white text-sm transition-colors font-body">Terms of Service</a>
@@ -912,101 +1084,6 @@ function App() {
           </form>
         </DialogContent>
       </Dialog>
-    </div>
-  );
-}
-
-// Before/After Slider Component
-function BeforeAfterSlider({ beforeImage, afterImage }: { beforeImage: string; afterImage: string }) {
-  const [sliderPosition, setSliderPosition] = useState(50);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const isDragging = useRef(false);
-
-  const handleMove = (clientX: number) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = clientX - rect.left;
-    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
-    setSliderPosition(percentage);
-  };
-
-  const handleMouseDown = () => {
-    isDragging.current = true;
-  };
-
-  const handleMouseUp = () => {
-    isDragging.current = false;
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging.current) return;
-    handleMove(e.clientX);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    handleMove(e.touches[0].clientX);
-  };
-
-  useEffect(() => {
-    const handleGlobalMouseUp = () => {
-      isDragging.current = false;
-    };
-    window.addEventListener('mouseup', handleGlobalMouseUp);
-    return () => window.removeEventListener('mouseup', handleGlobalMouseUp);
-  }, []);
-
-  return (
-    <div
-      ref={containerRef}
-      className="relative w-full aspect-video rounded-2xl overflow-hidden cursor-ew-resize select-none shadow-2xl"
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleMouseUp}
-    >
-      {/* After image (full) */}
-      <img
-        src={afterImage}
-        alt="After sealcoating"
-        className="absolute inset-0 w-full h-full object-cover"
-        draggable={false}
-      />
-
-      {/* Before image (clipped) */}
-      <div
-        className="absolute inset-0 overflow-hidden"
-        style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
-      >
-        <img
-          src={beforeImage}
-          alt="Before sealcoating"
-          className="absolute inset-0 w-full h-full object-cover"
-          draggable={false}
-        />
-        <div className="absolute top-4 left-4 bg-[#1E2A3B]/80 text-white px-4 py-2 rounded-full font-mono-label text-xs">
-          Before
-        </div>
-      </div>
-
-      {/* Slider handle */}
-      <div
-        className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize"
-        style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
-        onMouseDown={handleMouseDown}
-        onTouchStart={handleMouseDown}
-      >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-[#C94A4A] rounded-full flex items-center justify-center shadow-lg">
-          <div className="flex gap-1">
-            <div className="w-0.5 h-4 bg-white" />
-            <div className="w-0.5 h-4 bg-white" />
-          </div>
-        </div>
-      </div>
-
-      {/* After label */}
-      <div className="absolute top-4 right-4 bg-[#C94A4A]/90 text-white px-4 py-2 rounded-full font-mono-label text-xs">
-        After
-      </div>
     </div>
   );
 }
