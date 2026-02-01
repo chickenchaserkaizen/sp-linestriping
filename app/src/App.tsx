@@ -328,7 +328,7 @@ function App() {
       <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden picket-lines">
         {/* Background Video */}
         <video
-          src="/spstriping hero video 2.mp4"
+          src="/spstriping hero video 2-1.mp4"
           autoPlay
           loop
           muted
