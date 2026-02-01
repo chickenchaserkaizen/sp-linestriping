@@ -510,9 +510,9 @@ button {
   position: absolute;
   inset: 0;
   background: linear-gradient(to right,
-      rgba(15, 22, 33, 0.85) 0%,
-      rgba(15, 22, 33, 0.7) 40%,
-      rgba(15, 22, 33, 0.4) 100%);
+      rgba(15, 22, 33, 0.92) 0%,
+      rgba(15, 22, 33, 0.8) 40%,
+      rgba(15, 22, 33, 0.55) 100%);
   z-index: 1;
 }
 

@@ -328,7 +328,7 @@ function App() {
       <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden picket-lines">
         {/* Background Video */}
         <video
-          src="/spstriping_recreational hero video 1.mp4"
+          src="/spstriping hero video 2.mp4"
           autoPlay
           loop
           muted
@@ -426,42 +426,42 @@ function App() {
                   icon: ParkingSquare,
                   title: 'Line Striping',
                   desc: 'Fresh, crisp lines that define your space and direct traffic flow with precision.',
-                  image: '/ss3.jpg'
+                  image: '/sp-61.jpeg'
                 },
                 {
                   id: 'service-ada-fire-compliance',
                   icon: Flame,
                   title: 'ADA + Fire Compliance',
                   desc: 'Full compliance with ADA and fire lane standards for accessible, safe parking.',
-                  image: '/ss5.jpg'
+                  image: '/sp-62.jpeg'
                 },
                 {
                   id: 'service-signage',
                   icon: Signpost,
                   title: 'Signage',
                   desc: 'Professional pavement markings, directional arrows, and custom stencils.',
-                  image: '/ss4.jpg'
+                  image: '/sp-63.jpeg'
                 },
                 {
                   id: 'service-recreational-courts',
                   icon: Trophy,
                   title: 'Recreational Courts',
                   desc: 'Basketball, tennis, pickleball—precision court striping for sports facilities.',
-                  image: '/ss1.jpg'
+                  image: '/sp-64.jpeg'
                 },
                 {
                   id: 'service-seal-coating',
                   icon: Droplet,
                   title: 'Seal Coating',
                   desc: 'Protective coating that extends pavement life and restores that like-new black finish.',
-                  image: '/ss6.jpg'
+                  image: '/sp-65.jpeg'
                 },
                 {
                   id: 'service-crack-filling',
                   icon: Wrench,
                   title: 'Crack Filling',
                   desc: 'Stop cracks before they spread. Hot-pour crack sealing for lasting repairs.',
-                  image: '/ss2.jpg'
+                  image: '/sp-66.jpeg'
                 },
               ].map((service, i) => (
                 <div
@@ -563,12 +563,8 @@ function App() {
         <div className="relative z-10 px-6 lg:px-12 py-12">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-2 mb-4">
-                <Camera className="w-4 h-4 text-[#C94A4A]" />
-                <span className="font-mono-label text-[#C94A4A]">Our Work</span>
-              </div>
               <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-[#1E2A3B] mb-4">
-                Project <span className="text-[#C94A4A]">Gallery</span>
+                Our <span className="text-[#C94A4A]">Work</span>
               </h2>
               <p className="text-[#6B7280] max-w-2xl mx-auto font-body">
                 Browse our recent projects across different service categories.
@@ -577,12 +573,12 @@ function App() {
 
             {/* Gallery Rows */}
             {[
-              { id: 'service-line-striping', title: 'Line Striping', images: ['/ss1.jpg', '/ss2.jpg', '/ss3.jpg', '/ss4.jpg', '/ss5.jpg', '/ss6.jpg', '/ss7.jpg'] },
-              { id: 'service-ada-fire-compliance', title: 'ADA + Fire Signage', images: ['/ss8.jpg', '/ss9.jpg', '/ss10.jpg', '/ss11.jpg', '/ss12.jpg', '/IMG_0406.jpg', '/IMG_0407.jpg'] },
-              { id: 'service-signage', title: 'Signage & Markings', images: ['/ss4.jpg', '/ss8.jpg', '/ss9.jpg', '/ss10.jpg', '/ss11.jpg', '/IMG_0406.jpg', '/IMG_0407.jpg'] },
-              { id: 'service-recreational-courts', title: 'Recreational Courts', images: ['/IMG_0412.jpg', '/IMG_0413.jpg', '/IMG_0490.jpg', '/IMG_1246.jpg', '/IMG_1400.jpg', '/IMG_1748.jpg', '/IMG_1755.jpg'] },
-              { id: 'service-seal-coating', title: 'Seal Coating', images: ['/ss13.jpg', '/ss14.jpg', '/ss15.jpg', '/ss16.jpg', '/ss17.jpg', '/IMG_1926.jpg', '/IMG_3082.jpg'] },
-              { id: 'service-crack-filling', title: 'Crack Filling', images: ['/ss2.jpg', '/ss6.jpg', '/ss13.jpg', '/ss14.jpg', '/IMG_1926.jpg', '/IMG_3082.jpg'] },
+              { id: 'service-line-striping', title: 'Line Striping', images: ['/sp-1.jpeg', '/sp-2.jpg', '/sp-3.jpg', '/sp-4.jpg', '/sp-5.jpg', '/sp-6.jpg', '/sp-7.JPG', '/sp-8.jpg', '/sp-9.jpg', '/sp-10.jpg'] },
+              { id: 'service-ada-fire-compliance', title: 'ADA + Fire Signage', images: ['/sp-11.jpg', '/sp-12.jpg', '/sp-13.jpg', '/sp-14.jpg', '/sp-15.jpeg', '/sp-16.jpeg', '/sp-17.jpeg', '/sp-18.jpeg', '/sp-19.jpeg', '/sp-20.jpeg'] },
+              { id: 'service-signage', title: 'Signage & Markings', images: ['/sp-21.jpeg', '/sp-22.jpeg', '/sp-23.jpeg', '/sp-24.jpeg', '/sp-25.jpeg', '/sp-26.jpeg', '/sp-27.jpeg', '/sp-28.jpeg', '/sp-29.jpeg', '/sp-30.jpeg'] },
+              { id: 'service-recreational-courts', title: 'Recreational Courts', images: ['/sp-31.jpeg', '/sp-32.jpeg', '/sp-33.jpeg', '/sp-34.jpeg', '/sp-35.jpeg', '/sp-36.jpeg', '/sp-37.jpeg', '/sp-38.jpeg', '/sp-39.jpeg', '/sp-40.jpeg'] },
+              { id: 'service-seal-coating', title: 'Seal Coating', images: ['/sp-41.jpeg', '/sp-42.JPG', '/sp-43.JPG', '/sp-44.jpeg', '/sp-45.jpeg', '/sp-46.jpeg', '/sp-47.jpeg', '/sp-48.jpeg', '/sp-49.jpeg', '/sp-50.jpeg'] },
+              { id: 'service-crack-filling', title: 'Crack Filling', images: ['/sp-51.jpeg', '/sp-52.jpeg', '/sp-53.jpeg', '/sp-54.jpeg', '/sp-55.jpeg', '/sp-56.jpeg', '/sp-57.jpeg', '/sp-58.jpeg', '/sp-59.jpeg', '/sp-60.jpeg'] },
             ].map((category, categoryIndex) => (
               <div key={categoryIndex} id={category.id} className="scroll-mt-24">
                 <GalleryCarousel
@@ -616,9 +612,9 @@ function App() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
               {[
-                { step: '01', title: 'Measure & Layout', desc: 'We survey, chalk, and confirm compliance before paint hits pavement.', image: '/ss1.png' },
-                { step: '02', title: 'Prep & Paint', desc: 'Clean surface, crisp lines, high-visibility paint or thermoplastic.', image: '/ss2.png' },
-                { step: '03', title: 'Walkthrough', desc: 'Inspect, touch up, and sign off—no invoice until you\'re satisfied.', image: '/ss6.png' },
+                { step: '01', title: 'Measure & Layout', desc: 'We survey, chalk, and confirm compliance before paint hits pavement.', image: '/sp-67.jpeg' },
+                { step: '02', title: 'Prep & Paint', desc: 'Clean surface, crisp lines, high-visibility paint or thermoplastic.', image: '/sp-68.jpeg' },
+                { step: '03', title: 'Walkthrough', desc: 'Inspect, touch up, and sign off—no invoice until you\'re satisfied.', image: '/sp-69.jpeg' },
               ].map((item, i) => (
                 <div key={i} className="process-animate relative bg-[#FAF8F5] border-2 border-[#E5E7EB] rounded-2xl card-hover overflow-hidden">
                   <div className="aspect-[16/9] overflow-hidden">
