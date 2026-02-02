@@ -33,7 +33,7 @@
             class="w-full h-full object-cover"
             loading="lazy"
         />
-        <div class="absolute inset-0 bg-black/75"></div>
+        <div class="absolute inset-0 bg-black/85"></div>
     </div>
 
     <div class="relative z-10 px-6 lg:px-12 py-12">
