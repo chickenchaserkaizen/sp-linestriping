@@ -335,6 +335,7 @@ function App() {
           playsInline
           className="hero-video-bg"
         />
+        <div className="hero-video-overlay" />
 
         {/* Hero Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-24 lg:pt-48 lg:pb-32">
@@ -684,7 +685,12 @@ function App() {
 
 
       {/* Contact Section */}
-      <section ref={contactRef} className="section-flowing bg-[#1E2A3B] relative">
+      <section ref={contactRef} className="section-flowing bg-[#1E2A3B] relative overflow-hidden">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0 z-0">
+          <img src="/after-sealcoat.jpg" alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-black/75" />
+        </div>
         <div className="relative z-10 px-6 lg:px-12 py-12">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
@@ -823,13 +829,8 @@ function App() {
       </section>
 
       {/* Footer */}
-      <footer className="relative bg-[#0F1621] border-t border-[#1E2A3B] overflow-hidden">
-        {/* Background Image with Overlay */}
-        <div className="absolute inset-0 z-0">
-          <img src="/after-sealcoat.jpg" alt="" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-black/75" />
-        </div>
-        <div className="relative z-10 px-6 lg:px-12 py-12 lg:py-16">
+      <footer className="bg-[#0F1621] border-t border-[#1E2A3B]">
+        <div className="px-6 lg:px-12 py-12 lg:py-16">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-12">
               {/* Brand Column */}
