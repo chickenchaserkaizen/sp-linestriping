@@ -53,7 +53,7 @@
 <div class="mb-12">
     <div class="flex items-center justify-between mb-4">
         <h3 class="font-display text-xl text-[#1E2A3B]">{title}</h3>
-        <div class="hidden md:flex gap-2">
+        <div class="flex gap-2">
             <button
                 on:click={handlePrev}
                 disabled={currentIndex === 0}

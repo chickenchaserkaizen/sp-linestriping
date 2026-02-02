@@ -13,7 +13,7 @@
 >
     <!-- Background Video -->
     <video
-        src="/sp striping hero background video 1_5.mp4"
+        src="/sp%20striping%20hero%20background%20video%201_5.mp4"
         autoplay
         loop
         muted
