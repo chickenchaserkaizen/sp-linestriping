@@ -1,18 +1,101 @@
 <script lang="ts">
-    import { createEventDispatcher, onMount } from "svelte";
+    import { createEventDispatcher, onMount, onDestroy } from "svelte";
+    import { browser } from "$app/environment";
     import { Calendar } from "lucide-svelte";
 
     export let section: HTMLElement;
 
     const dispatch = createEventDispatcher();
     let videoElement: HTMLVideoElement;
+    let hasPlayed = false;
+    let observer: IntersectionObserver | null = null;
+
+    // Aggressive play attempt function
+    function attemptPlay() {
+        if (!videoElement || hasPlayed) return;
+
+        // Ensure video is muted (required for autoplay)
+        videoElement.muted = true;
+
+        const playPromise = videoElement.play();
+        if (playPromise !== undefined) {
+            playPromise
+                .then(() => {
+                    hasPlayed = true;
+                    removeInteractionListeners();
+                })
+                .catch((error) => {
+                    console.log("Video autoplay attempt:", error.message);
+                });
+        }
+    }
+
+    // Play on any user interaction (for strict mobile browsers)
+    function handleInteraction() {
+        attemptPlay();
+    }
+
+    function removeInteractionListeners() {
+        if (browser) {
+            document.removeEventListener("touchstart", handleInteraction);
+            document.removeEventListener("click", handleInteraction);
+            document.removeEventListener("scroll", handleInteraction);
+        }
+    }
 
     onMount(() => {
-        if (videoElement) {
-            videoElement.play().catch((error) => {
-                console.log("Video autoplay failed:", error);
-            });
+        if (!browser || !videoElement) return;
+
+        // Set attributes programmatically for maximum compatibility
+        videoElement.setAttribute("muted", "");
+        videoElement.setAttribute("playsinline", "");
+        videoElement.muted = true;
+        (videoElement as any).playsInline = true;
+        (videoElement as any).webkitPlaysInline = true;
+
+        // Attempt immediate play
+        attemptPlay();
+
+        // Retry after a short delay (helps with some mobile browsers)
+        setTimeout(attemptPlay, 100);
+        setTimeout(attemptPlay, 500);
+        setTimeout(attemptPlay, 1000);
+
+        // Use IntersectionObserver to play when video is visible
+        observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        attemptPlay();
+                    }
+                });
+            },
+            { threshold: 0.1 },
+        );
+        observer.observe(videoElement);
+
+        // Listen for any user interaction to trigger play
+        document.addEventListener("touchstart", handleInteraction, {
+            passive: true,
+            once: true,
+        });
+        document.addEventListener("click", handleInteraction, { once: true });
+        document.addEventListener("scroll", handleInteraction, {
+            passive: true,
+            once: true,
+        });
+
+        // Also try on video events
+        videoElement.addEventListener("canplay", attemptPlay);
+        videoElement.addEventListener("loadeddata", attemptPlay);
+        videoElement.addEventListener("loadedmetadata", attemptPlay);
+    });
+
+    onDestroy(() => {
+        if (observer) {
+            observer.disconnect();
         }
+        removeInteractionListeners();
     });
 </script>
 
