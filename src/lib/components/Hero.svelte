@@ -1,101 +1,34 @@
 <script lang="ts">
-    import { createEventDispatcher, onMount, onDestroy } from "svelte";
-    import { browser } from "$app/environment";
+    import { createEventDispatcher, onMount } from "svelte";
     import { Calendar } from "lucide-svelte";
 
     export let section: HTMLElement;
-
     const dispatch = createEventDispatcher();
     let videoElement: HTMLVideoElement;
-    let hasPlayed = false;
-    let observer: IntersectionObserver | null = null;
-
-    // Aggressive play attempt function
-    function attemptPlay() {
-        if (!videoElement || hasPlayed) return;
-
-        // Ensure video is muted (required for autoplay)
-        videoElement.muted = true;
-
-        const playPromise = videoElement.play();
-        if (playPromise !== undefined) {
-            playPromise
-                .then(() => {
-                    hasPlayed = true;
-                    removeInteractionListeners();
-                })
-                .catch((error) => {
-                    console.log("Video autoplay attempt:", error.message);
-                });
-        }
-    }
-
-    // Play on any user interaction (for strict mobile browsers)
-    function handleInteraction() {
-        attemptPlay();
-    }
-
-    function removeInteractionListeners() {
-        if (browser) {
-            document.removeEventListener("touchstart", handleInteraction);
-            document.removeEventListener("click", handleInteraction);
-            document.removeEventListener("scroll", handleInteraction);
-        }
-    }
 
     onMount(() => {
-        if (!browser || !videoElement) return;
+        if (!videoElement) return;
 
-        // Set attributes programmatically for maximum compatibility
-        videoElement.setAttribute("muted", "");
-        videoElement.setAttribute("playsinline", "");
-        videoElement.muted = true;
-        (videoElement as any).playsInline = true;
-        (videoElement as any).webkitPlaysInline = true;
+        // Try to play immediately
+        const playPromise = videoElement.play();
 
-        // Attempt immediate play
-        attemptPlay();
-
-        // Retry after a short delay (helps with some mobile browsers)
-        setTimeout(attemptPlay, 100);
-        setTimeout(attemptPlay, 500);
-        setTimeout(attemptPlay, 1000);
-
-        // Use IntersectionObserver to play when video is visible
-        observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        attemptPlay();
-                    }
+        if (playPromise !== undefined) {
+            playPromise.catch(() => {
+                // If autoplay is blocked (e.g. Low Power Mode),
+                // play on first user touch/interaction
+                const playOnInteraction = () => {
+                    videoElement.play();
+                    window.removeEventListener("touchstart", playOnInteraction);
+                    window.removeEventListener("mousedown", playOnInteraction);
+                };
+                window.addEventListener("touchstart", playOnInteraction, {
+                    passive: true,
                 });
-            },
-            { threshold: 0.1 },
-        );
-        observer.observe(videoElement);
-
-        // Listen for any user interaction to trigger play
-        document.addEventListener("touchstart", handleInteraction, {
-            passive: true,
-            once: true,
-        });
-        document.addEventListener("click", handleInteraction, { once: true });
-        document.addEventListener("scroll", handleInteraction, {
-            passive: true,
-            once: true,
-        });
-
-        // Also try on video events
-        videoElement.addEventListener("canplay", attemptPlay);
-        videoElement.addEventListener("loadeddata", attemptPlay);
-        videoElement.addEventListener("loadedmetadata", attemptPlay);
-    });
-
-    onDestroy(() => {
-        if (observer) {
-            observer.disconnect();
+                window.addEventListener("mousedown", playOnInteraction, {
+                    passive: true,
+                });
+            });
         }
-        removeInteractionListeners();
     });
 </script>
 
@@ -107,13 +40,12 @@
     <video
         bind:this={videoElement}
         src="/sp striping hero background video 1_5.mp4"
+        poster="/hero-poster.jpg"
         autoplay
         loop
         muted
         playsinline
-        disablepictureinpicture
-        preload="auto"
-        class="hero-video-bg"
+        class="hero-video-bg pointer-events-none bg-black"
     ></video>
     <div class="hero-video-overlay"></div>
 
