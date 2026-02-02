@@ -27,8 +27,8 @@
                         class="text-[#9CA3AF] text-sm mb-6 font-body leading-relaxed"
                     >
                         Professional line striping and sealcoating services for
-                        the Central Valley since 2012. Quality work, honest
-                        pricing.
+                        the Central Valley since 2012. Quality service for your
+                        quality business.
                     </p>
                     <div class="flex gap-3">
                         <a
@@ -36,6 +36,7 @@
                             target="_blank"
                             rel="noopener noreferrer"
                             class="w-10 h-10 rounded-full bg-[#1E2A3B] flex items-center justify-center text-[#9CA3AF] hover:text-white hover:bg-[#000000] transition-all"
+                            aria-label="Follow us on TikTok"
                         >
                             <svg
                                 class="w-5 h-5"
@@ -51,6 +52,7 @@
                             target="_blank"
                             rel="noopener noreferrer"
                             class="w-10 h-10 rounded-full bg-[#1E2A3B] flex items-center justify-center text-[#9CA3AF] hover:text-white hover:bg-[#FF0000] transition-all"
+                            aria-label="Follow us on YouTube"
                         >
                             <svg
                                 class="w-5 h-5"
@@ -66,6 +68,7 @@
                             target="_blank"
                             rel="noopener noreferrer"
                             class="w-10 h-10 rounded-full bg-[#1E2A3B] flex items-center justify-center text-[#9CA3AF] hover:text-white hover:bg-[#4285F4] transition-all"
+                            aria-label="Find us on Google Maps"
                         >
                             <svg
                                 class="w-5 h-5"
@@ -224,12 +227,12 @@
                 >
                 <div class="flex items-center gap-6">
                     <a
-                        href="#"
+                        href="/privacy-policy"
                         class="text-[#6B7280] hover:text-white text-sm transition-colors font-body"
                         >Privacy Policy</a
                     >
                     <a
-                        href="#"
+                        href="/terms-of-service"
                         class="text-[#6B7280] hover:text-white text-sm transition-colors font-body"
                         >Terms of Service</a
                     >
