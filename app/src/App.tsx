@@ -328,7 +328,7 @@ function App() {
       <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden picket-lines">
         {/* Background Video */}
         <video
-          src="/spstriping hero video 2-1.mp4"
+          src="/spstriping hero background video 1_3.mp4"
           autoPlay
           loop
           muted
@@ -410,9 +410,9 @@ function App() {
                 <span className="font-mono-label text-[#C94A4A]">Our Services</span>
               </div>
               <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-[#1E2A3B] mb-6">
-                Striping. Sealcoating.
+                STRIPING. SEALCOATING.
                 <br />
-                <span className="text-[#C94A4A]">Compliance.</span>
+                <span className="text-[#C94A4A]">COMPLIANCE.</span>
               </h2>
               <p className="text-[#6B7280] max-w-2xl mx-auto font-body">
                 We layout, paint, and protect asphalt surfaces—so your lot looks sharp and stays compliant.
@@ -426,42 +426,42 @@ function App() {
                   icon: ParkingSquare,
                   title: 'Line Striping',
                   desc: 'Fresh, crisp lines that define your space and direct traffic flow with precision.',
-                  image: '/sp-61.jpeg'
+                  image: '/line striping/sp-17.jpeg'
                 },
                 {
                   id: 'service-ada-fire-compliance',
                   icon: Flame,
                   title: 'ADA + Fire Compliance',
                   desc: 'Full compliance with ADA and fire lane standards for accessible, safe parking.',
-                  image: '/sp-62.jpeg'
+                  image: '/ADA and fire compliance/sp-20.jpeg'
                 },
                 {
                   id: 'service-signage',
                   icon: Signpost,
                   title: 'Signage',
                   desc: 'Professional pavement markings, directional arrows, and custom stencils.',
-                  image: '/sp-63.jpeg'
+                  image: '/Signage/sp-45.jpeg'
                 },
                 {
                   id: 'service-recreational-courts',
                   icon: Trophy,
                   title: 'Recreational Courts',
                   desc: 'Basketball, tennis, pickleball—precision court striping for sports facilities.',
-                  image: '/sp-64.jpeg'
+                  image: '/recreational courts/sp-1.jpeg'
                 },
                 {
                   id: 'service-seal-coating',
                   icon: Droplet,
                   title: 'Seal Coating',
                   desc: 'Protective coating that extends pavement life and restores that like-new black finish.',
-                  image: '/sp-65.jpeg'
+                  image: '/Seal Coating/sp-31.jpeg'
                 },
                 {
                   id: 'service-crack-filling',
                   icon: Wrench,
                   title: 'Crack Filling',
                   desc: 'Stop cracks before they spread. Hot-pour crack sealing for lasting repairs.',
-                  image: '/sp-66.jpeg'
+                  image: '/Crack Filling/sp-16.jpeg'
                 },
               ].map((service, i) => (
                 <div
@@ -507,7 +507,7 @@ function App() {
                 <span className="font-mono-label text-[#C94A4A]">Testimonials</span>
               </div>
               <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-white mb-4">
-                They Notice The <span className="text-[#C94A4A]">Details.</span>
+                THEY NOTICE THE <span className="text-[#C94A4A]">DETAILS.</span>
               </h2>
             </div>
 
@@ -564,7 +564,7 @@ function App() {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-[#1E2A3B] mb-4">
-                Our <span className="text-[#C94A4A]">Work</span>
+                OUR <span className="text-[#C94A4A]">WORK</span>
               </h2>
               <p className="text-[#6B7280] max-w-2xl mx-auto font-body">
                 Browse our recent projects across different service categories.
@@ -573,12 +573,12 @@ function App() {
 
             {/* Gallery Rows */}
             {[
-              { id: 'service-line-striping', title: 'Line Striping', images: ['/sp-1.jpeg', '/sp-2.jpg', '/sp-3.jpg', '/sp-4.jpg', '/sp-5.jpg', '/sp-6.jpg', '/sp-7.JPG', '/sp-8.jpg', '/sp-9.jpg', '/sp-10.jpg'] },
-              { id: 'service-ada-fire-compliance', title: 'ADA + Fire Signage', images: ['/sp-11.jpg', '/sp-12.jpg', '/sp-13.jpg', '/sp-14.jpg', '/sp-15.jpeg', '/sp-16.jpeg', '/sp-17.jpeg', '/sp-18.jpeg', '/sp-19.jpeg', '/sp-20.jpeg'] },
-              { id: 'service-signage', title: 'Signage & Markings', images: ['/sp-21.jpeg', '/sp-22.jpeg', '/sp-23.jpeg', '/sp-24.jpeg', '/sp-25.jpeg', '/sp-26.jpeg', '/sp-27.jpeg', '/sp-28.jpeg', '/sp-29.jpeg', '/sp-30.jpeg'] },
-              { id: 'service-recreational-courts', title: 'Recreational Courts', images: ['/sp-31.jpeg', '/sp-32.jpeg', '/sp-33.jpeg', '/sp-34.jpeg', '/sp-35.jpeg', '/sp-36.jpeg', '/sp-37.jpeg', '/sp-38.jpeg', '/sp-39.jpeg', '/sp-40.jpeg'] },
-              { id: 'service-seal-coating', title: 'Seal Coating', images: ['/sp-41.jpeg', '/sp-42.JPG', '/sp-43.JPG', '/sp-44.jpeg', '/sp-45.jpeg', '/sp-46.jpeg', '/sp-47.jpeg', '/sp-48.jpeg', '/sp-49.jpeg', '/sp-50.jpeg'] },
-              { id: 'service-crack-filling', title: 'Crack Filling', images: ['/sp-51.jpeg', '/sp-52.jpeg', '/sp-53.jpeg', '/sp-54.jpeg', '/sp-55.jpeg', '/sp-56.jpeg', '/sp-57.jpeg', '/sp-58.jpeg', '/sp-59.jpeg', '/sp-60.jpeg'] },
+              { id: 'service-line-striping', title: 'Line Striping', images: ['/line striping/sp-17.jpeg', '/line striping/sp-18.jpeg', '/line striping/sp-19.jpeg', '/line striping/sp-22.jpeg', '/line striping/sp-23.jpeg', '/line striping/sp-24.jpeg', '/line striping/sp-30.jpeg', '/line striping/sp-32.jpeg', '/line striping/sp-33.jpeg', '/line striping/sp-34.jpeg'] },
+              { id: 'service-ada-fire-compliance', title: 'ADA + Fire Signage', images: ['/ADA and fire compliance/sp-20.jpeg', '/ADA and fire compliance/sp-21.jpeg', '/ADA and fire compliance/sp-25.jpeg', '/ADA and fire compliance/sp-26.jpeg', '/ADA and fire compliance/sp-27.jpeg', '/ADA and fire compliance/sp-28.jpeg', '/ADA and fire compliance/sp-29.jpeg', '/ADA and fire compliance/sp-36.jpeg', '/ADA and fire compliance/sp-38.jpeg', '/ADA and fire compliance/sp-39.jpeg'] },
+              { id: 'service-signage', title: 'Signage & Markings', images: ['/Signage/sp-45.jpeg', '/Signage/sp-46.jpeg', '/Signage/sp-47.jpeg', '/Signage/sp-68.jpeg', '/Signage/sp-95.jpg'] },
+              { id: 'service-recreational-courts', title: 'Recreational Courts', images: ['/recreational courts/sp-1.jpeg', '/recreational courts/sp-2.jpg', '/recreational courts/sp-3.jpg', '/recreational courts/sp-4.jpg', '/recreational courts/sp-5.jpg', '/recreational courts/sp-6.jpg', '/recreational courts/sp-7.JPG', '/recreational courts/sp-9.jpg', '/recreational courts/sp-10.jpg', '/recreational courts/sp-11.jpg'] },
+              { id: 'service-seal-coating', title: 'Seal Coating', images: ['/Seal Coating/sp-31.jpeg', '/Seal Coating/sp-44.jpeg', '/Seal Coating/sp-63.jpeg', '/Seal Coating/sp-8.jpg', '/Crack Filling/sp-16.jpeg', '/Crack Filling/sp-57.jpeg', '/Crack Filling/sp-62.jpeg'] },
+              { id: 'service-crack-filling', title: 'Crack Filling', images: ['/Crack Filling/sp-16.jpeg', '/Crack Filling/sp-57.jpeg', '/Crack Filling/sp-62.jpeg', '/Seal Coating/sp-31.jpeg', '/Seal Coating/sp-44.jpeg', '/Seal Coating/sp-63.jpeg', '/Seal Coating/sp-8.jpg'] },
             ].map((category, categoryIndex) => (
               <div key={categoryIndex} id={category.id} className="scroll-mt-24">
                 <GalleryCarousel
@@ -601,9 +601,9 @@ function App() {
                 <span className="font-mono-label text-[#C94A4A]">Our Process</span>
               </div>
               <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-[#1E2A3B] mb-4">
-                From Quote To
+                FROM QUOTE TO
                 <br />
-                <span className="text-[#C94A4A]">Fresh Paint.</span>
+                <span className="text-[#C94A4A]">FRESH PAINT.</span>
               </h2>
               <p className="text-[#6B7280] max-w-2xl mx-auto font-body">
                 Our proven three-step process ensures precision, compliance, and complete satisfaction.
@@ -612,9 +612,9 @@ function App() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
               {[
-                { step: '01', title: 'Measure & Layout', desc: 'We survey, chalk, and confirm compliance before paint hits pavement.', image: '/sp-67.jpeg' },
-                { step: '02', title: 'Prep & Paint', desc: 'Clean surface, crisp lines, high-visibility paint or thermoplastic.', image: '/sp-68.jpeg' },
-                { step: '03', title: 'Walkthrough', desc: 'Inspect, touch up, and sign off—no invoice until you\'re satisfied.', image: '/sp-69.jpeg' },
+                { step: '01', title: 'Measure & Layout', desc: 'We survey, chalk, and confirm compliance before paint hits pavement.', image: '/line striping/sp-67.jpeg' },
+                { step: '02', title: 'Prep & Paint', desc: 'Clean surface, crisp lines, high-visibility paint or thermoplastic.', image: '/Signage/sp-68.jpeg' },
+                { step: '03', title: 'Walkthrough', desc: 'Inspect, touch up, and sign off—no invoice until you\'re satisfied.', image: '/line striping/sp-65.jpeg' },
               ].map((item, i) => (
                 <div key={i} className="process-animate relative bg-[#FAF8F5] border-2 border-[#E5E7EB] rounded-2xl card-hover overflow-hidden">
                   <div className="aspect-[16/9] overflow-hidden">
@@ -651,9 +651,9 @@ function App() {
                 <span className="font-mono-label text-[#C94A4A]">Service Area</span>
               </div>
               <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#1E2A3B] mb-4">
-                Fresno &
+                FRESNO &
                 <br />
-                <span className="text-[#C94A4A]">Central Valley.</span>
+                <span className="text-[#C94A4A]">CENTRAL VALLEY.</span>
               </h2>
               <p className="text-[#6B7280] max-w-2xl mx-auto font-body">
                 From downtown lots to warehouse campuses—if it's asphalt, we stripe it.
@@ -695,9 +695,9 @@ function App() {
                     <span className="font-mono-label text-[#C94A4A]">Get in Touch</span>
                   </div>
                   <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-white mb-4">
-                    Request A Free
+                    REQUEST A FREE
                     <br />
-                    <span className="text-[#C94A4A]">Estimate.</span>
+                    <span className="text-[#C94A4A]">ESTIMATE.</span>
                   </h2>
                   <p className="text-[#9CA3AF] mb-4 font-body">
                     Tell us what you need—striping, sealcoating, ADA updates, or a full restripe.
