@@ -8,7 +8,7 @@
     const dispatch = createEventDispatcher();
 </script>
 
-<section bind:this={section} class="section-flowing bg-white relative">
+<section bind:this={section} class="section-flowing bg-[#1E2A3B] relative">
     <div class="relative z-10 px-6 lg:px-12 py-12">
         <div class="max-w-7xl mx-auto">
             <div class="process-animate text-center mb-16">
@@ -18,13 +18,13 @@
                     >
                 </div>
                 <h2
-                    class="font-display text-3xl sm:text-4xl md:text-5xl text-[#1E2A3B] mb-4"
+                    class="font-display text-3xl sm:text-4xl md:text-5xl text-white mb-4"
                 >
                     FROM QUOTE TO
                     <br />
                     <span class="text-[#C94A4A]">FRESH PAINT.</span>
                 </h2>
-                <p class="text-[#6B7280] max-w-2xl mx-auto font-body">
+                <p class="text-[#9CA3AF] max-w-2xl mx-auto font-body">
                     Our proven three-step process ensures precision, compliance,
                     and complete satisfaction.
                 </p>
