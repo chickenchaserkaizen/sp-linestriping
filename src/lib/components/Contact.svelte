@@ -28,7 +28,7 @@
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0">
         <img
-            src="/after-sealcoat.jpg"
+            src="/line striping/sp-67.jpeg"
             alt=""
             class="w-full h-full object-cover"
             loading="lazy"
@@ -139,6 +139,7 @@
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     class="w-12 h-12 bg-[#1E2A3B] rounded-full flex items-center justify-center text-[#9CA3AF] hover:text-white hover:bg-[#000000] transition-all"
+                                    aria-label="Follow us on TikTok"
                                 >
                                     <svg
                                         class="w-6 h-6"
@@ -154,6 +155,7 @@
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     class="w-12 h-12 bg-[#1E2A3B] rounded-full flex items-center justify-center text-[#9CA3AF] hover:text-white hover:bg-[#FF0000] transition-all"
+                                    aria-label="Follow us on YouTube"
                                 >
                                     <svg
                                         class="w-6 h-6"
@@ -177,10 +179,12 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                             <div>
                                 <label
+                                    for="name"
                                     class="text-[#6B7280] text-sm mb-2 block font-body"
                                     >Name</label
                                 >
                                 <input
+                                    id="name"
                                     bind:value={formData.name}
                                     placeholder="Your name"
                                     class="w-full px-4 py-3 bg-[#FAF8F5] border border-[#E5E7EB] text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
@@ -189,10 +193,12 @@
                             </div>
                             <div>
                                 <label
+                                    for="phone"
                                     class="text-[#6B7280] text-sm mb-2 block font-body"
                                     >Phone</label
                                 >
                                 <input
+                                    id="phone"
                                     bind:value={formData.phone}
                                     placeholder="(555) 123-4567"
                                     class="w-full px-4 py-3 bg-[#FAF8F5] border border-[#E5E7EB] text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
@@ -203,10 +209,12 @@
 
                         <div class="mb-4">
                             <label
+                                for="email"
                                 class="text-[#6B7280] text-sm mb-2 block font-body"
                                 >Email</label
                             >
                             <input
+                                id="email"
                                 bind:value={formData.email}
                                 type="email"
                                 placeholder="you@company.com"
@@ -217,10 +225,12 @@
 
                         <div class="mb-4">
                             <label
+                                for="service"
                                 class="text-[#6B7280] text-sm mb-2 block font-body"
                                 >Service Needed</label
                             >
                             <select
+                                id="service"
                                 bind:value={formData.service}
                                 class="w-full px-4 py-3 bg-[#FAF8F5] border border-[#E5E7EB] text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
                             >
@@ -235,10 +245,12 @@
 
                         <div class="mb-6">
                             <label
+                                for="message"
                                 class="text-[#6B7280] text-sm mb-2 block font-body"
                                 >Message</label
                             >
                             <textarea
+                                id="message"
                                 bind:value={formData.message}
                                 placeholder="Tell us about your project..."
                                 class="w-full px-4 py-3 bg-[#FAF8F5] border border-[#E5E7EB] text-[#1E2A3B] min-h-[100px] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"

@@ -111,7 +111,6 @@
         loop
         muted
         playsinline
-        webkit-playsinline
         disablepictureinpicture
         preload="auto"
         class="hero-video-bg"
