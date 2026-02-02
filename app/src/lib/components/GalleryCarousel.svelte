@@ -9,8 +9,42 @@
     let touchStart = 0;
     let touchEnd = 0;
 
-    const itemsVisible = 5;
+    let innerWidth = 0;
+
+    $: itemsVisible =
+        innerWidth < 480
+            ? 1
+            : innerWidth < 768
+              ? 2
+              : innerWidth < 1024
+                ? 3
+                : innerWidth < 1280
+                  ? 4
+                  : 5;
+
     $: maxIndex = Math.max(0, images.length - itemsVisible);
+
+    $: slideTransform = (() => {
+        let percentage, pixelOffset;
+        if (innerWidth < 480) {
+            percentage = 85;
+            pixelOffset = 16;
+        } else if (innerWidth < 768) {
+            percentage = 50;
+            pixelOffset = 8;
+        } else if (innerWidth < 1024) {
+            percentage = 33.333;
+            pixelOffset = 5;
+        } else if (innerWidth < 1280) {
+            percentage = 25;
+            pixelOffset = 4;
+        } else {
+            percentage = 20;
+            pixelOffset = 3.2;
+        }
+
+        return `transform: translateX(calc(-${currentIndex} * (${percentage}% + ${pixelOffset}px)))`;
+    })();
 
     function handlePrev() {
         currentIndex = Math.max(0, currentIndex - 1);
@@ -50,6 +84,8 @@
     }
 </script>
 
+<svelte:window bind:innerWidth />
+
 <div class="mb-12">
     <div class="flex items-center justify-between mb-4">
         <h3 class="font-display text-xl text-[#1E2A3B]">{title}</h3>
@@ -79,10 +115,7 @@
         role="region"
         aria-label="{title} gallery"
     >
-        <div
-            class="gallery-track"
-            style="transform: translateX(calc(-{currentIndex} * (20% + 3.2px)))"
-        >
+        <div class="gallery-track" style={slideTransform}>
             {#each images as image, i}
                 <button
                     class="gallery-slide cursor-pointer"
