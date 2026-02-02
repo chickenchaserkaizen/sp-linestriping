@@ -1,10 +1,19 @@
 <script lang="ts">
-    import { createEventDispatcher } from "svelte";
+    import { createEventDispatcher, onMount } from "svelte";
     import { Calendar } from "lucide-svelte";
 
     export let section: HTMLElement;
 
     const dispatch = createEventDispatcher();
+    let videoElement: HTMLVideoElement;
+
+    onMount(() => {
+        if (videoElement) {
+            videoElement.play().catch((error) => {
+                console.log("Video autoplay failed:", error);
+            });
+        }
+    });
 </script>
 
 <section
@@ -13,13 +22,16 @@
 >
     <!-- Background Video -->
     <video
+        bind:this={videoElement}
         src="/sp striping hero background video 1_5.mp4"
         autoplay
         loop
         muted
         playsinline
+        webkit-playsinline
+        disablepictureinpicture
+        preload="auto"
         class="hero-video-bg"
-        poster="/line striping/sp-17.jpeg"
     ></video>
     <div class="hero-video-overlay"></div>
 
