@@ -236,6 +236,12 @@
                         class="text-[#6B7280] hover:text-white text-sm transition-colors font-body"
                         >Terms of Service</a
                     >
+                    <button
+                        on:click={() =>
+                            window.scrollTo({ top: 0, behavior: "smooth" })}
+                        class="text-[#6B7280] hover:text-white text-sm transition-colors font-body"
+                        >Back to Top</button
+                    >
                 </div>
             </div>
         </div>
