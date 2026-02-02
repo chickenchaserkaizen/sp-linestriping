@@ -39,7 +39,7 @@
                     <span class="font-display text-xl text-[#1E2A3B]">
                         S&P <span class="text-[#C94A4A]">STRIPING</span>
                     </span>
-                    <span class="text-[10px] text-[#6B7280] hidden sm:block"
+                    <span class="text-[10px] text-[#6B7280]"
                         >License #1142328</span
                     >
                 </div>
@@ -173,6 +173,12 @@
             >
                 Book Now
             </button>
+            <a
+                href="tel:+15597043141"
+                class="text-center text-lg font-bold text-[#1E2A3B] mt-2 block hover:text-[#C94A4A] transition-colors"
+            >
+                +1 (559) 704-3141
+            </a>
         </div>
     </div>
 {/if}

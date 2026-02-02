@@ -210,6 +210,16 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Phone Number -->
+            <div class="mt-12 animate-fade-in-up animation-delay-600">
+                <a
+                    href="tel:+15597043141"
+                    class="font-display text-3xl sm:text-4xl lg:text-5xl text-white hover:text-[#C94A4A] transition-colors tracking-wide"
+                >
+                    +1 (559) 704-3141
+                </a>
+            </div>
         </div>
     </div>
 </section>
