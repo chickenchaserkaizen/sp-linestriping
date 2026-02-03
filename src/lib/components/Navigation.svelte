@@ -29,23 +29,28 @@
     <div class="max-w-7xl mx-auto flex items-center justify-between">
         <!-- Logo with Slogan and License -->
         <div class="flex items-center gap-4">
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-2 sm:gap-3">
                 <img
                     src="/logo.png"
                     alt="S&P Striping Logo"
-                    class="h-10 w-auto"
+                    class="h-9 sm:h-12 w-auto"
                 />
-                <div class="flex flex-col justify-center gap-0.5">
+                <div class="flex items-center gap-2">
                     <span
-                        class="font-display text-xl leading-none text-[#1E2A3B]"
+                        class="font-display text-3xl sm:text-4xl leading-none text-[#1E2A3B] tracking-tight"
                         >S&P</span
                     >
-                    <div class="flex items-center gap-2 leading-none">
+                    <div class="flex flex-col justify-center leading-none">
                         <span
-                            class="text-[10px] font-bold text-[#C94A4A] tracking-wider uppercase"
-                            >Line Striping & Sealcoating</span
+                            class="text-[10px] sm:text-[11px] font-extrabold text-[#C94A4A] tracking-wider uppercase"
+                            >LINE STRIPING</span
                         >
-                        <span class="text-[10px] text-[#6B7280]"
+                        <span
+                            class="text-[10px] sm:text-[11px] font-extrabold text-[#C94A4A] tracking-wider uppercase"
+                            >& SEALCOATING</span
+                        >
+                        <span
+                            class="text-[9px] sm:text-[10px] text-[#6B7280] font-medium"
                             >License #1142328</span
                         >
                     </div>
