@@ -20,7 +20,9 @@
                             class="h-10 w-auto"
                         />
                         <span class="font-display text-xl text-white">
-                            S&P <span class="text-[#C94A4A]">STRIPING</span>
+                            S&P <span class="text-[#C94A4A]"
+                                >LINE STRIPING & SEALCOATING</span
+                            >
                         </span>
                     </div>
                     <p
@@ -154,7 +156,8 @@
                                 class="w-4 h-4 text-[#C94A4A] flex-shrink-0 mt-1"
                             />
                             <span class="text-[#9CA3AF] text-sm font-body"
-                                >Fresno, CA<br />Central Valley Service Area</span
+                                >Fresno, CA serving the entire San Joaquin
+                                Valley</span
                             >
                         </li>
                         <li class="flex items-center gap-3">
@@ -189,20 +192,11 @@
                 <div>
                     <h4 class="font-display text-white text-lg mb-4">Hours</h4>
                     <ul class="space-y-2 text-[#9CA3AF] text-sm font-body">
-                        <li class="flex justify-between">
-                            <span>Mon - Fri:</span><span class="text-white"
-                                >7AM - 6PM</span
+                        <li class="flex flex-col gap-1">
+                            <span class="text-white text-base font-semibold"
+                                >Monday-Friday 24 Hours</span
                             >
-                        </li>
-                        <li class="flex justify-between">
-                            <span>Saturday:</span><span class="text-white"
-                                >8AM - 4PM</span
-                            >
-                        </li>
-                        <li class="flex justify-between">
-                            <span>Sunday:</span><span class="text-white"
-                                >Closed</span
-                            >
+                            <span>We stripe anytime</span>
                         </li>
                     </ul>
                     <div class="mt-6 p-4 bg-[#1E2A3B] rounded-xl">

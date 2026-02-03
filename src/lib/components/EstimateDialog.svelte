@@ -46,240 +46,281 @@
 
         <!-- Dialog -->
         <div
-            class="relative z-10 bg-white border border-[#E5E7EB] text-[#1E2A3B] max-w-lg w-full max-h-[90vh] overflow-y-auto rounded-2xl"
+            class="relative z-10 bg-[#1E2A3B] border border-[#374151] text-white max-w-lg w-full max-h-[90vh] overflow-y-auto rounded-2xl overflow-hidden"
             transition:scale={{ duration: 200, start: 0.95 }}
         >
-            <!-- Header -->
-            <div
-                class="flex items-center justify-between p-6 border-b border-[#E5E7EB]"
-            >
-                <h2 class="font-display text-2xl">
-                    {#if step === 1}Get Your Free Estimate{/if}
-                    {#if step === 2}Project Details{/if}
-                    {#if step === 3}Upload Photos{/if}
-                </h2>
-                <button
-                    on:click={close}
-                    class="text-[#6B7280] hover:text-[#1E2A3B] transition-colors"
+            <!-- Background Video with Overlay -->
+            <div class="absolute inset-0 z-0">
+                <video
+                    src="/bg_estimates.mp4"
+                    autoplay
+                    loop
+                    muted
+                    playsinline
+                    class="w-full h-full object-cover"
+                ></video>
+                <div class="hero-video-overlay"></div>
+            </div>
+
+            <!-- Content Container -->
+            <div class="relative z-10">
+                <!-- Header -->
+                <div
+                    class="flex items-center justify-between p-6 border-b border-white/10"
                 >
-                    <X size={24} />
-                </button>
-            </div>
+                    <h2 class="font-display text-2xl text-white">
+                        {#if step === 1}Get Your Free Estimate{/if}
+                        {#if step === 2}Project Details{/if}
+                        {#if step === 3}Upload Photos{/if}
+                    </h2>
+                    <button
+                        on:click={close}
+                        class="text-gray-400 hover:text-white transition-colors"
+                    >
+                        <X size={24} />
+                    </button>
+                </div>
 
-            <!-- Progress -->
-            <div class="flex justify-center gap-2 p-4">
-                {#each [1, 2, 3] as s}
-                    <div
-                        class="w-8 h-1 rounded-full {s <= step
-                            ? 'bg-[#C94A4A]'
-                            : 'bg-[#E5E7EB]'}"
-                    ></div>
-                {/each}
-            </div>
-
-            <!-- Content -->
-            <form on:submit={handleSubmit} class="p-6">
-                {#if step === 1}
-                    <div class="space-y-4">
-                        <div>
-                            <label
-                                class="text-[#6B7280] text-sm mb-2 block font-body"
-                                >Full Name</label
-                            >
-                            <input
-                                placeholder="John Smith"
-                                class="w-full px-4 py-3 bg-[#FAF8F5] border border-[#E5E7EB] text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label
-                                class="text-[#6B7280] text-sm mb-2 block font-body"
-                                >Phone Number</label
-                            >
-                            <input
-                                placeholder="(559) 123-4567"
-                                class="w-full px-4 py-3 bg-[#FAF8F5] border border-[#E5E7EB] text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label
-                                class="text-[#6B7280] text-sm mb-2 block font-body"
-                                >Email</label
-                            >
-                            <input
-                                type="email"
-                                placeholder="john@company.com"
-                                class="w-full px-4 py-3 bg-[#FAF8F5] border border-[#E5E7EB] text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label
-                                class="text-[#6B7280] text-sm mb-2 block font-body"
-                                >Property Address</label
-                            >
-                            <input
-                                placeholder="123 Main St, Fresno, CA"
-                                class="w-full px-4 py-3 bg-[#FAF8F5] border border-[#E5E7EB] text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
-                                required
-                            />
-                        </div>
-                        <button
-                            type="button"
-                            on:click={() => (step = 2)}
-                            class="btn-primary w-full mt-4 flex items-center justify-center gap-2"
-                        >
-                            Continue
-                            <ArrowRight size={18} />
-                        </button>
-                    </div>
-                {/if}
-
-                {#if step === 2}
-                    <div class="space-y-4">
-                        <div>
-                            <label
-                                class="text-[#6B7280] text-sm mb-2 block font-body"
-                                >Service Type</label
-                            >
-                            <select
-                                class="w-full px-4 py-3 bg-[#FAF8F5] border border-[#E5E7EB] text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
-                            >
-                                <option value="">Select service</option>
-                                <option value="striping">Line Striping</option>
-                                <option value="sealcoating">Sealcoating</option>
-                                <option value="ada">ADA Compliance</option>
-                                <option value="restripe"
-                                    >Restripe / Refresh</option
-                                >
-                                <option value="full">Full Package</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label
-                                class="text-[#6B7280] text-sm mb-2 block font-body"
-                                >Approximate Lot Size</label
-                            >
-                            <select
-                                class="w-full px-4 py-3 bg-[#FAF8F5] border border-[#E5E7EB] text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
-                            >
-                                <option value="">Select size</option>
-                                <option value="small"
-                                    >Small (Under 20 spaces)</option
-                                >
-                                <option value="medium"
-                                    >Medium (20-50 spaces)</option
-                                >
-                                <option value="large"
-                                    >Large (50-100 spaces)</option
-                                >
-                                <option value="xlarge"
-                                    >Extra Large (100+ spaces)</option
-                                >
-                            </select>
-                        </div>
-                        <div>
-                            <label
-                                class="text-[#6B7280] text-sm mb-2 block font-body"
-                                >Preferred Timeline</label
-                            >
-                            <select
-                                class="w-full px-4 py-3 bg-[#FAF8F5] border border-[#E5E7EB] text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
-                            >
-                                <option value="">Select timeline</option>
-                                <option value="asap">ASAP</option>
-                                <option value="2weeks">Within 2 weeks</option>
-                                <option value="month">Within a month</option>
-                                <option value="flexible">Flexible</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label
-                                class="text-[#6B7280] text-sm mb-2 block font-body"
-                                >Additional Details</label
-                            >
-                            <textarea
-                                placeholder="Any specific requirements or questions..."
-                                class="w-full px-4 py-3 bg-[#FAF8F5] border border-[#E5E7EB] text-[#1E2A3B] rounded-xl min-h-[100px] focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
-                            ></textarea>
-                        </div>
-                        <div class="flex gap-3">
-                            <button
-                                type="button"
-                                on:click={() => (step = 1)}
-                                class="btn-ghost flex-1">Back</button
-                            >
-                            <button
-                                type="button"
-                                on:click={() => (step = 3)}
-                                class="btn-primary flex-1">Continue</button
-                            >
-                        </div>
-                    </div>
-                {/if}
-
-                {#if step === 3}
-                    <div class="space-y-4">
+                <!-- Progress -->
+                <div class="flex justify-center gap-2 p-4">
+                    {#each [1, 2, 3] as s}
                         <div
-                            class="border-2 border-dashed border-[#E5E7EB] rounded-2xl p-8 text-center hover:border-[#C94A4A]/50 transition-colors"
-                        >
-                            <Camera
-                                class="w-12 h-12 text-[#9CA3AF] mx-auto mb-4"
-                            />
-                            <p
-                                class="text-[#1E2A3B] font-semibold mb-2 font-body"
-                            >
-                                Upload Photos of Your Lot
-                            </p>
-                            <p class="text-[#6B7280] text-sm mb-4 font-body">
-                                Help us provide a more accurate estimate by
-                                sharing photos of your parking area.
-                            </p>
-                            <button type="button" class="btn-ghost text-sm">
-                                <Upload size={16} class="inline mr-2" />
-                                Choose Files
-                            </button>
-                        </div>
+                            class="w-8 h-1 rounded-full {s <= step
+                                ? 'bg-[#C94A4A]'
+                                : 'bg-gray-700'}"
+                        ></div>
+                    {/each}
+                </div>
 
-                        <div class="bg-[#FAF8F5] p-4 rounded-2xl">
-                            <div class="flex items-start gap-3">
-                                <Map
-                                    class="w-5 h-5 text-[#3B5998] flex-shrink-0 mt-0.5"
+                <!-- Content -->
+                <form on:submit={handleSubmit} class="p-6">
+                    {#if step === 1}
+                        <div class="space-y-4">
+                            <div>
+                                <label
+                                    class="text-gray-300 text-sm mb-2 block font-body"
+                                    for="dialog-name">Full Name</label
+                                >
+                                <input
+                                    id="dialog-name"
+                                    placeholder="John Smith"
+                                    class="w-full px-4 py-3 bg-[#FAF8F5] border border-transparent text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
+                                    required
                                 />
-                                <div>
-                                    <p
-                                        class="text-[#1E2A3B] text-sm font-semibold mb-1 font-body"
-                                    >
-                                        Drop a Pin
-                                    </p>
-                                    <p class="text-[#6B7280] text-xs font-body">
-                                        You can also share your location or drop
-                                        a pin on the map for easier navigation
-                                        to your property.
-                                    </p>
-                                </div>
                             </div>
-                        </div>
-
-                        <div class="flex gap-3 pt-4">
+                            <div>
+                                <label
+                                    class="text-gray-300 text-sm mb-2 block font-body"
+                                    for="dialog-phone">Phone Number</label
+                                >
+                                <input
+                                    id="dialog-phone"
+                                    placeholder="(559) 123-4567"
+                                    class="w-full px-4 py-3 bg-[#FAF8F5] border border-transparent text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    class="text-gray-300 text-sm mb-2 block font-body"
+                                    for="dialog-email">Email</label
+                                >
+                                <input
+                                    id="dialog-email"
+                                    type="email"
+                                    placeholder="john@company.com"
+                                    class="w-full px-4 py-3 bg-[#FAF8F5] border border-transparent text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    class="text-gray-300 text-sm mb-2 block font-body"
+                                    for="dialog-address">Property Address</label
+                                >
+                                <input
+                                    id="dialog-address"
+                                    placeholder="123 Main St, Fresno, CA"
+                                    class="w-full px-4 py-3 bg-[#FAF8F5] border border-transparent text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
+                                    required
+                                />
+                            </div>
                             <button
                                 type="button"
                                 on:click={() => (step = 2)}
-                                class="btn-ghost flex-1">Back</button
+                                class="btn-primary w-full mt-4 flex items-center justify-center gap-2"
                             >
-                            <button
-                                type="submit"
-                                class="btn-primary flex-1 flex items-center justify-center gap-2"
-                            >
-                                <Send size={18} />
-                                Submit Request
+                                Continue
+                                <ArrowRight size={18} />
                             </button>
                         </div>
-                    </div>
-                {/if}
-            </form>
+                    {/if}
+
+                    {#if step === 2}
+                        <div class="space-y-4">
+                            <div>
+                                <label
+                                    class="text-gray-300 text-sm mb-2 block font-body"
+                                    for="dialog-service">Service Type</label
+                                >
+                                <select
+                                    id="dialog-service"
+                                    class="w-full px-4 py-3 bg-[#FAF8F5] border border-transparent text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
+                                >
+                                    <option value="">Select service</option>
+                                    <option value="striping"
+                                        >Line Striping</option
+                                    >
+                                    <option value="sealcoating"
+                                        >Sealcoating</option
+                                    >
+                                    <option value="ada">ADA Compliance</option>
+                                    <option value="restripe"
+                                        >Restripe / Refresh</option
+                                    >
+                                    <option value="full">Full Package</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label
+                                    class="text-gray-300 text-sm mb-2 block font-body"
+                                    for="dialog-size"
+                                    >Approximate Lot Size</label
+                                >
+                                <select
+                                    id="dialog-size"
+                                    class="w-full px-4 py-3 bg-[#FAF8F5] border border-transparent text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
+                                >
+                                    <option value="">Select size</option>
+                                    <option value="small"
+                                        >Small (Under 20 spaces)</option
+                                    >
+                                    <option value="medium"
+                                        >Medium (20-50 spaces)</option
+                                    >
+                                    <option value="large"
+                                        >Large (50-100 spaces)</option
+                                    >
+                                    <option value="xlarge"
+                                        >Extra Large (100+ spaces)</option
+                                    >
+                                </select>
+                            </div>
+                            <div>
+                                <label
+                                    class="text-gray-300 text-sm mb-2 block font-body"
+                                    for="dialog-timeline"
+                                    >Preferred Timeline</label
+                                >
+                                <select
+                                    id="dialog-timeline"
+                                    class="w-full px-4 py-3 bg-[#FAF8F5] border border-transparent text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
+                                >
+                                    <option value="">Select timeline</option>
+                                    <option value="asap">ASAP</option>
+                                    <option value="2weeks"
+                                        >Within 2 weeks</option
+                                    >
+                                    <option value="month">Within a month</option
+                                    >
+                                    <option value="flexible">Flexible</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label
+                                    class="text-gray-300 text-sm mb-2 block font-body"
+                                    for="dialog-details"
+                                    >Additional Details</label
+                                >
+                                <textarea
+                                    id="dialog-details"
+                                    placeholder="Any specific requirements or questions..."
+                                    class="w-full px-4 py-3 bg-[#FAF8F5] border border-transparent text-[#1E2A3B] rounded-xl min-h-[100px] focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
+                                ></textarea>
+                            </div>
+                            <div class="flex gap-3">
+                                <button
+                                    type="button"
+                                    on:click={() => (step = 1)}
+                                    class="btn-ghost text-white flex-1 hover:bg-white/10 hover:text-white inset-0 before:hidden"
+                                    >Back</button
+                                >
+                                <button
+                                    type="button"
+                                    on:click={() => (step = 3)}
+                                    class="btn-primary flex-1">Continue</button
+                                >
+                            </div>
+                        </div>
+                    {/if}
+
+                    {#if step === 3}
+                        <div class="space-y-4">
+                            <div
+                                class="border-2 border-dashed border-white/20 rounded-2xl p-8 text-center hover:border-[#C94A4A]/50 transition-colors bg-white/5"
+                            >
+                                <Camera
+                                    class="w-12 h-12 text-gray-400 mx-auto mb-4"
+                                />
+                                <p
+                                    class="text-white font-semibold mb-2 font-body"
+                                >
+                                    Upload Photos of Your Lot
+                                </p>
+                                <p class="text-gray-400 text-sm mb-4 font-body">
+                                    Help us provide a more accurate estimate by
+                                    sharing photos of your parking area.
+                                </p>
+                                <button
+                                    type="button"
+                                    class="btn-ghost text-white text-sm hover:bg-white/10 hover:text-white inset-0 before:hidden"
+                                >
+                                    <Upload size={16} class="inline mr-2" />
+                                    Choose Files
+                                </button>
+                            </div>
+
+                            <div class="bg-white/10 p-4 rounded-2xl">
+                                <div class="flex items-start gap-3">
+                                    <Map
+                                        class="w-5 h-5 text-[#3B5998] flex-shrink-0 mt-0.5"
+                                    />
+                                    <div>
+                                        <p
+                                            class="text-white text-sm font-semibold mb-1 font-body"
+                                        >
+                                            Drop a Pin
+                                        </p>
+                                        <p
+                                            class="text-gray-400 text-xs font-body"
+                                        >
+                                            You can also share your location or
+                                            drop a pin on the map for easier
+                                            navigation to your property.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-3 pt-4">
+                                <button
+                                    type="button"
+                                    on:click={() => (step = 2)}
+                                    class="btn-ghost text-white flex-1 hover:bg-white/10 hover:text-white inset-0 before:hidden"
+                                    >Back</button
+                                >
+                                <button
+                                    type="submit"
+                                    class="btn-primary flex-1 flex items-center justify-center gap-2"
+                                >
+                                    <Send size={18} />
+                                    Submit Request
+                                </button>
+                            </div>
+                        </div>
+                    {/if}
+                </form>
+            </div>
         </div>
     </div>
 {/if}

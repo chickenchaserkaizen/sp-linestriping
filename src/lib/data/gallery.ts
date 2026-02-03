@@ -71,7 +71,7 @@ export const galleryCategories: GalleryCategory[] = [
             '/Seal Coating/sp-31.jpeg',
             '/Seal Coating/sp-44.jpeg',
             '/Seal Coating/sp-63.jpeg',
-            '/Seal Coating/sp-8.jpg',
+
             '/Crack Filling/sp-16.jpeg',
             '/Crack Filling/sp-57.jpeg',
             '/Crack Filling/sp-62.jpeg'
@@ -87,7 +87,7 @@ export const galleryCategories: GalleryCategory[] = [
             '/Seal Coating/sp-31.jpeg',
             '/Seal Coating/sp-44.jpeg',
             '/Seal Coating/sp-63.jpeg',
-            '/Seal Coating/sp-8.jpg'
+
         ]
     }
 ];

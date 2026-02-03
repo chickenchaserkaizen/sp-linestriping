@@ -26,14 +26,17 @@
     class="section-flowing bg-[#1E2A3B] relative overflow-hidden"
 >
     <!-- Background Image with Overlay -->
+    <!-- Background Video with Overlay -->
     <div class="absolute inset-0 z-0">
-        <img
-            src="/line striping/sp-67.jpeg"
-            alt=""
+        <video
+            src="/bg_estimates.mp4"
+            autoplay
+            loop
+            muted
+            playsinline
             class="w-full h-full object-cover"
-            loading="lazy"
-        />
-        <div class="absolute inset-0 bg-black/85"></div>
+        ></video>
+        <div class="hero-video-overlay"></div>
     </div>
 
     <div class="relative z-10 px-6 lg:px-12 py-12">
@@ -121,7 +124,8 @@
                                     Service Area
                                 </div>
                                 <div class="font-semibold text-white">
-                                    Fresno, CA & Central Valley
+                                    Fresno, CA serving the entire San Joaquin
+                                    Valley
                                 </div>
                             </div>
                         </div>
@@ -267,20 +271,6 @@
                     </form>
 
                     <!-- Google Maps Iframe -->
-                    <div
-                        class="rounded-2xl overflow-hidden border-2 border-[#E5E7EB] shadow-2xl h-[300px] w-full bg-white"
-                    >
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6388.5498442522085!2d-119.700816!3d36.8119315!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80945d075507a6a3%3A0xc510b68fc9bbf152!2sS%26P%20-%20Line%20Striping%20and%20Sealcoating!5e0!3m2!1sen!2sus!4v1769767312762!5m2!1sen!2sus"
-                            width="100%"
-                            height="100%"
-                            style="border: 0;"
-                            allowfullscreen
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"
-                            title="S&P - Line Striping and Sealcoating Location"
-                        ></iframe>
-                    </div>
                 </div>
             </div>
         </div>

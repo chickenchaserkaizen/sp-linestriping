@@ -37,7 +37,9 @@
                 />
                 <div class="flex flex-col">
                     <span class="font-display text-xl text-[#1E2A3B]">
-                        S&P <span class="text-[#C94A4A]">STRIPING</span>
+                        S&P <span class="text-[#C94A4A]"
+                            >LINE STRIPING & SEALCOATING</span
+                        >
                     </span>
                     <span class="text-[10px] text-[#6B7280]"
                         >License #1142328</span

@@ -1,11 +1,14 @@
 <script lang="ts">
   import "../app.css";
   import { Toaster } from "svelte-sonner";
+  import { services } from "$lib/data/services";
+  import { testimonials } from "$lib/data/testimonials";
 
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    name: "S&P Line Striping and Sealcoating",
+    name: "S&P Line Striping & Sealcoating",
+    image: "https://spstriping.com/logo.png",
     description:
       "Professional line striping, sealcoating, and ADA-compliant markings for the Central Valley",
     telephone: "+1-559-704-3141",
@@ -22,13 +25,53 @@
       latitude: "36.8119315",
       longitude: "-119.700816",
     },
+    areaServed: {
+      "@type": "GeoCircle",
+      geoMidpoint: {
+        "@type": "GeoCoordinates",
+        latitude: "36.8119315",
+        longitude: "-119.700816",
+      },
+      geoRadius: "80000",
+    },
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: "5.0",
       reviewCount: "50",
     },
+    review: testimonials.map((t) => ({
+      "@type": "Review",
+      author: {
+        "@type": "Person",
+        name: t.name,
+      },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: t.rating.toString(),
+      },
+      reviewBody: t.quote,
+    })),
     priceRange: "$$",
-    openingHours: ["Mo-Fr 07:00-18:00", "Sa 08:00-16:00"],
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "00:00",
+        closes: "23:59",
+      },
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Line Striping & Sealcoating Services",
+      itemListElement: services.map((s) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: s.title,
+          description: s.desc,
+        },
+      })),
+    },
     sameAs: [
       "https://www.tiktok.com/@spstriping",
       "https://www.youtube.com/@spstriping",
