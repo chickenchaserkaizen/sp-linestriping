@@ -73,8 +73,8 @@
       })),
     },
     sameAs: [
-      "https://www.tiktok.com/@spstriping",
-      "https://www.youtube.com/@spstriping",
+      "https://www.tiktok.com/@spstripingfresno?_r=1&_t=ZP-93cWbq7hxkt",
+      "https://youtube.com/@spstriping?si=zhp-eNQhVeFdM7-j",
     ],
   };
 </script>

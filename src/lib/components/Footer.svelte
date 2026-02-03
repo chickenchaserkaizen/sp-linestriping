@@ -34,7 +34,7 @@
                     </p>
                     <div class="flex gap-3">
                         <a
-                            href="https://www.tiktok.com/@spstriping"
+                            href="https://www.tiktok.com/@spstripingfresno?_r=1&_t=ZP-93cWbq7hxkt"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="w-10 h-10 rounded-full bg-[#1E2A3B] flex items-center justify-center text-[#9CA3AF] hover:text-white hover:bg-[#000000] transition-all"
@@ -50,7 +50,7 @@
                             >
                         </a>
                         <a
-                            href="https://www.youtube.com/@spstriping"
+                            href="https://youtube.com/@spstriping?si=zhp-eNQhVeFdM7-j"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="w-10 h-10 rounded-full bg-[#1E2A3B] flex items-center justify-center text-[#9CA3AF] hover:text-white hover:bg-[#FF0000] transition-all"

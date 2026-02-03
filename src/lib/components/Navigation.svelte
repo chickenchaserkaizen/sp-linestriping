@@ -22,7 +22,7 @@
 </script>
 
 <nav
-    class="fixed top-0 left-0 right-0 z-50 px-6 lg:px-12 py-4 transition-all duration-500 {scrolledPastHero
+    class="fixed top-0 left-0 right-0 z-50 px-6 lg:px-12 py-2 transition-all duration-500 {scrolledPastHero
         ? 'bg-transparent backdrop-blur-0'
         : 'bg-[#FAF8F5]/95 backdrop-blur-sm'}"
 >
@@ -35,7 +35,9 @@
                     alt="S&P Striping Logo"
                     class="h-10 w-auto"
                 />
-                <div class="flex flex-col">
+                <div
+                    class="flex flex-col lg:flex-row lg:items-baseline lg:gap-2"
+                >
                     <span class="font-display text-xl text-[#1E2A3B]">
                         S&P <span class="text-[#C94A4A]"
                             >LINE STRIPING & SEALCOATING</span
