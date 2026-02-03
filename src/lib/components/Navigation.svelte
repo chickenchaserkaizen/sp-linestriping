@@ -22,30 +22,33 @@
 </script>
 
 <nav
-    class="fixed top-0 left-0 right-0 z-50 px-6 lg:px-12 py-2 transition-all duration-500 {scrolledPastHero
+    class="fixed top-0 left-0 right-0 z-50 px-6 lg:px-12 py-4 transition-all duration-500 {scrolledPastHero
         ? 'bg-transparent backdrop-blur-0'
         : 'bg-[#FAF8F5]/95 backdrop-blur-sm'}"
 >
     <div class="max-w-7xl mx-auto flex items-center justify-between">
         <!-- Logo with Slogan and License -->
         <div class="flex items-center gap-4">
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-3">
                 <img
                     src="/logo.png"
                     alt="S&P Striping Logo"
                     class="h-10 w-auto"
                 />
-                <div
-                    class="flex flex-col lg:flex-row lg:items-baseline lg:gap-2"
-                >
-                    <span class="font-display text-xl text-[#1E2A3B]">
-                        S&P <span class="text-[#C94A4A]"
-                            >LINE STRIPING & SEALCOATING</span
-                        >
-                    </span>
-                    <span class="text-[10px] text-[#6B7280]"
-                        >License #1142328</span
+                <div class="flex flex-col justify-center gap-0.5">
+                    <span
+                        class="font-display text-xl leading-none text-[#1E2A3B]"
+                        >S&P</span
                     >
+                    <div class="flex items-center gap-2 leading-none">
+                        <span
+                            class="text-[10px] font-bold text-[#C94A4A] tracking-wider uppercase"
+                            >Line Striping & Sealcoating</span
+                        >
+                        <span class="text-[10px] text-[#6B7280]"
+                            >License #1142328</span
+                        >
+                    </div>
                 </div>
             </div>
         </div>
