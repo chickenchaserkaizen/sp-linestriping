@@ -29,28 +29,26 @@
     <div class="max-w-7xl mx-auto flex items-center justify-between">
         <!-- Logo with Slogan and License -->
         <div class="flex items-center gap-4">
-            <div class="flex items-center gap-2 sm:gap-3">
+            <div class="flex items-center gap-3">
                 <img
                     src="/logo.png"
                     alt="S&P Striping Logo"
-                    class="h-9 sm:h-12 w-auto"
+                    class="h-10 w-auto"
                 />
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-3">
                     <span
-                        class="font-display text-3xl sm:text-4xl leading-none text-[#1E2A3B] tracking-tight"
+                        class="font-display text-2xl leading-none text-[#1E2A3B]"
                         >S&P</span
                     >
-                    <div class="flex flex-col justify-center leading-none">
+                    <div
+                        class="bg-[#1E2A3B]/10 w-[1px] h-8 hidden sm:block"
+                    ></div>
+                    <div class="flex flex-col justify-center -space-y-0.5">
                         <span
-                            class="text-[10px] sm:text-[11px] font-extrabold text-[#C94A4A] tracking-wider uppercase"
-                            >LINE STRIPING</span
+                            class="text-[10px] sm:text-xs font-bold text-[#C94A4A] tracking-wider uppercase"
+                            >Line Striping & Sealcoating</span
                         >
-                        <span
-                            class="text-[10px] sm:text-[11px] font-extrabold text-[#C94A4A] tracking-wider uppercase"
-                            >& SEALCOATING</span
-                        >
-                        <span
-                            class="text-[9px] sm:text-[10px] text-[#6B7280] font-medium"
+                        <span class="text-[10px] text-[#6B7280]"
                             >License #1142328</span
                         >
                     </div>
