@@ -12,12 +12,40 @@
         message: "",
     };
 
-    function handleSubmit(e: SubmitEvent) {
+    async function handleSubmit(e: SubmitEvent) {
         e.preventDefault();
-        toast.success(
-            "Estimate request submitted! We'll contact you within 24 hours.",
-        );
-        formData = { name: "", phone: "", email: "", service: "", message: "" };
+
+        try {
+            const response = await fetch(
+                "https://formsubmit.co/ajax/spstripingfresno@gmail.com",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                    },
+                    body: JSON.stringify(formData),
+                },
+            );
+
+            if (response.ok) {
+                toast.success(
+                    "thank you! we'll update your request as soon as possible.",
+                );
+                formData = {
+                    name: "",
+                    phone: "",
+                    email: "",
+                    service: "",
+                    message: "",
+                };
+            } else {
+                toast.error("Something went wrong. Please try again.");
+            }
+        } catch (error) {
+            toast.error("Something went wrong. Please try again.");
+            console.error("Form submission error:", error);
+        }
     }
 </script>
 
@@ -188,7 +216,7 @@
                                     >Name</label
                                 >
                                 <input
-                                    id="name"
+                                    name="name"
                                     bind:value={formData.name}
                                     placeholder="Your name"
                                     class="w-full px-4 py-3 bg-[#FAF8F5] border border-[#E5E7EB] text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
@@ -202,7 +230,7 @@
                                     >Phone</label
                                 >
                                 <input
-                                    id="phone"
+                                    name="phone"
                                     bind:value={formData.phone}
                                     placeholder="(555) 123-4567"
                                     class="w-full px-4 py-3 bg-[#FAF8F5] border border-[#E5E7EB] text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
@@ -218,7 +246,7 @@
                                 >Email</label
                             >
                             <input
-                                id="email"
+                                name="email"
                                 bind:value={formData.email}
                                 type="email"
                                 placeholder="you@company.com"
@@ -234,7 +262,7 @@
                                 >Service Needed</label
                             >
                             <select
-                                id="service"
+                                name="service"
                                 bind:value={formData.service}
                                 class="w-full px-4 py-3 bg-[#FAF8F5] border border-[#E5E7EB] text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
                             >
@@ -254,7 +282,7 @@
                                 >Message</label
                             >
                             <textarea
-                                id="message"
+                                name="message"
                                 bind:value={formData.message}
                                 placeholder="Tell us about your project..."
                                 class="w-full px-4 py-3 bg-[#FAF8F5] border border-[#E5E7EB] text-[#1E2A3B] min-h-[100px] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"

@@ -112,6 +112,15 @@
         clip-path: polygon(6% 0%, 94% 0%, 100% 50%, 94% 100%, 6% 100%, 0% 50%);
     }
 
+    .btn-primary-sm {
+        @apply px-8 py-2.5 bg-[#C94A4A] text-white font-semibold text-sm transition-all duration-300 hover:bg-[#B03D3D] hover:scale-[1.03] hover:shadow-lg active:scale-[0.97];
+        font-family: 'Montserrat', system-ui, sans-serif;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        box-shadow: 0 4px 15px rgba(201, 74, 74, 0.3);
+        clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+    }
+
     .btn-ghost {
         @apply px-8 py-3 bg-transparent text-[#1E2A3B] font-semibold relative transition-all duration-300 hover:bg-[#1E2A3B] hover:text-white active:scale-95;
         font-family: 'Montserrat', system-ui, sans-serif;

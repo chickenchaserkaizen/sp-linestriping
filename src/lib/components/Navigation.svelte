@@ -28,7 +28,12 @@
 >
     <div class="max-w-7xl mx-auto flex items-center justify-between">
         <!-- Logo with Slogan and License -->
-        <div class="flex items-center gap-4">
+        <div
+            class="flex items-center gap-4 transition-all duration-500 {scrolledPastHero &&
+            !isMenuOpen
+                ? 'opacity-0 -translate-y-2 pointer-events-none lg:opacity-100 lg:translate-y-0 lg:pointer-events-auto'
+                : 'opacity-100 translate-y-0'}"
+        >
             <div class="flex items-center gap-3">
                 <img
                     src="/logo.png"
@@ -102,7 +107,7 @@
         <div class="flex items-center gap-3">
             <button
                 on:click={() => dispatch("openEstimate")}
-                class="btn-primary hidden sm:flex items-center gap-2"
+                class="btn-primary-sm hidden sm:flex items-center gap-2"
             >
                 <Calendar size={16} />
                 Book Now
@@ -179,7 +184,7 @@
                     dispatch("openEstimate");
                     dispatch("closeMenu");
                 }}
-                class="btn-primary text-center mt-4"
+                class="btn-primary-sm text-center mt-4"
             >
                 Book Now
             </button>

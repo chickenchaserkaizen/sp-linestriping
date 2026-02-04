@@ -10,17 +10,62 @@
 
     let step = 1;
 
+    let formData = {
+        name: "",
+        phone: "",
+        email: "",
+        address: "",
+        service: "",
+        lotSize: "",
+        timeline: "",
+        details: "",
+    };
+
     function close() {
         dispatch("close");
         step = 1;
     }
 
-    function handleSubmit(e: SubmitEvent) {
+    async function handleSubmit(e: SubmitEvent) {
         e.preventDefault();
-        toast.success(
-            "Estimate request submitted! We'll contact you within 24 hours.",
-        );
-        close();
+
+        try {
+            const response = await fetch(
+                "https://formsubmit.co/ajax/spstripingfresno@gmail.com",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                    },
+                    body: JSON.stringify(formData),
+                },
+            );
+
+            if (response.ok) {
+                toast.success(
+                    "thank you! we'll update your request as soon as possible.",
+                );
+                close();
+                // Reset form
+                formData = {
+                    name: "",
+                    phone: "",
+                    email: "",
+                    address: "",
+                    service: "",
+                    lotSize: "",
+                    timeline: "",
+                    details: "",
+                };
+                step = 1;
+            } else {
+                toast.error("Something went wrong. Please try again.");
+            }
+        } catch (error) {
+            toast.error("Something went wrong. Please try again.");
+            console.error("Form submission error:", error);
+        }
     }
 
     function handleKeydown(e: KeyboardEvent) {
@@ -103,6 +148,8 @@
                                 >
                                 <input
                                     id="dialog-name"
+                                    name="name"
+                                    bind:value={formData.name}
                                     placeholder="John Smith"
                                     class="w-full px-4 py-3 bg-[#FAF8F5] border border-transparent text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
                                     required
@@ -115,6 +162,8 @@
                                 >
                                 <input
                                     id="dialog-phone"
+                                    name="phone"
+                                    bind:value={formData.phone}
                                     placeholder="(559) 123-4567"
                                     class="w-full px-4 py-3 bg-[#FAF8F5] border border-transparent text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
                                     required
@@ -127,6 +176,8 @@
                                 >
                                 <input
                                     id="dialog-email"
+                                    name="email"
+                                    bind:value={formData.email}
                                     type="email"
                                     placeholder="john@company.com"
                                     class="w-full px-4 py-3 bg-[#FAF8F5] border border-transparent text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
@@ -140,6 +191,8 @@
                                 >
                                 <input
                                     id="dialog-address"
+                                    name="address"
+                                    bind:value={formData.address}
                                     placeholder="123 Main St, Fresno, CA"
                                     class="w-full px-4 py-3 bg-[#FAF8F5] border border-transparent text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
                                     required
@@ -165,6 +218,8 @@
                                 >
                                 <select
                                     id="dialog-service"
+                                    name="service"
+                                    bind:value={formData.service}
                                     class="w-full px-4 py-3 bg-[#FAF8F5] border border-transparent text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
                                 >
                                     <option value="">Select service</option>
@@ -189,6 +244,8 @@
                                 >
                                 <select
                                     id="dialog-size"
+                                    name="lotSize"
+                                    bind:value={formData.lotSize}
                                     class="w-full px-4 py-3 bg-[#FAF8F5] border border-transparent text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
                                 >
                                     <option value="">Select size</option>
@@ -214,6 +271,8 @@
                                 >
                                 <select
                                     id="dialog-timeline"
+                                    name="timeline"
+                                    bind:value={formData.timeline}
                                     class="w-full px-4 py-3 bg-[#FAF8F5] border border-transparent text-[#1E2A3B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
                                 >
                                     <option value="">Select timeline</option>
@@ -234,6 +293,8 @@
                                 >
                                 <textarea
                                     id="dialog-details"
+                                    name="details"
+                                    bind:value={formData.details}
                                     placeholder="Any specific requirements or questions..."
                                     class="w-full px-4 py-3 bg-[#FAF8F5] border border-transparent text-[#1E2A3B] rounded-xl min-h-[100px] focus:outline-none focus:ring-2 focus:ring-[#C94A4A]"
                                 ></textarea>
