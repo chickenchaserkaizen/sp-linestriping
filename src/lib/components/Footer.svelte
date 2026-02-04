@@ -220,33 +220,37 @@
                         >© 2026 S&P Line Striping & Asphalt Sealcoating. All
                         rights reserved.</span
                     >
-                    <span class="text-[#6B7280] text-xs font-body">
+                </div>
+                <div class="flex flex-col items-center md:items-end gap-2">
+                    <div class="flex items-center gap-6">
+                        <a
+                            href="/privacy-policy"
+                            class="text-[#6B7280] hover:text-white text-sm transition-colors font-body"
+                            >Privacy Policy</a
+                        >
+                        <a
+                            href="/terms-of-service"
+                            class="text-[#6B7280] hover:text-white text-sm transition-colors font-body"
+                            >Terms of Service</a
+                        >
+                        <button
+                            on:click={() =>
+                                window.scrollTo({ top: 0, behavior: "smooth" })}
+                            class="text-[#6B7280] hover:text-white text-sm transition-colors font-body"
+                            >Back to Top</button
+                        >
+                    </div>
+                    <span
+                        class="text-[#6B7280] text-[10px] font-body opacity-80"
+                    >
                         Site built by <a
                             href="https://www.polancoadvertising.com"
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="hover:bg-black hover:text-white px-2 py-0.5 rounded transition-all"
+                            class="hover:text-[#000000] transition-colors"
                             >Polanco Advertising</a
                         >
                     </span>
-                </div>
-                <div class="flex items-center gap-6">
-                    <a
-                        href="/privacy-policy"
-                        class="text-[#6B7280] hover:text-white text-sm transition-colors font-body"
-                        >Privacy Policy</a
-                    >
-                    <a
-                        href="/terms-of-service"
-                        class="text-[#6B7280] hover:text-white text-sm transition-colors font-body"
-                        >Terms of Service</a
-                    >
-                    <button
-                        on:click={() =>
-                            window.scrollTo({ top: 0, behavior: "smooth" })}
-                        class="text-[#6B7280] hover:text-white text-sm transition-colors font-body"
-                        >Back to Top</button
-                    >
                 </div>
             </div>
         </div>
