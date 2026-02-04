@@ -1,6 +1,6 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte";
-    import { X, ArrowRight, Camera, Map, Upload, Send } from "lucide-svelte";
+    import { X, ArrowRight, Send } from "lucide-svelte";
     import { fade, scale } from "svelte/transition";
     import { toast } from "svelte-sonner";
 
@@ -116,7 +116,6 @@
                     <h2 class="font-display text-2xl text-white">
                         {#if step === 1}Get Your Free Estimate{/if}
                         {#if step === 2}Project Details{/if}
-                        {#if step === 3}Upload Photos{/if}
                     </h2>
                     <button
                         on:click={close}
@@ -128,7 +127,7 @@
 
                 <!-- Progress -->
                 <div class="flex justify-center gap-2 p-4">
-                    {#each [1, 2, 3] as s}
+                    {#each [1, 2] as s}
                         <div
                             class="w-8 h-1 rounded-full {s <= step
                                 ? 'bg-[#C94A4A]'
@@ -303,70 +302,6 @@
                                 <button
                                     type="button"
                                     on:click={() => (step = 1)}
-                                    class="btn-ghost text-white flex-1 hover:bg-white/10 hover:text-white inset-0 before:hidden"
-                                    >Back</button
-                                >
-                                <button
-                                    type="button"
-                                    on:click={() => (step = 3)}
-                                    class="btn-primary flex-1">Continue</button
-                                >
-                            </div>
-                        </div>
-                    {/if}
-
-                    {#if step === 3}
-                        <div class="space-y-4">
-                            <div
-                                class="border-2 border-dashed border-white/20 rounded-2xl p-8 text-center hover:border-[#C94A4A]/50 transition-colors bg-white/5"
-                            >
-                                <Camera
-                                    class="w-12 h-12 text-gray-400 mx-auto mb-4"
-                                />
-                                <p
-                                    class="text-white font-semibold mb-2 font-body"
-                                >
-                                    Upload Photos of Your Lot
-                                </p>
-                                <p class="text-gray-400 text-sm mb-4 font-body">
-                                    Help us provide a more accurate estimate by
-                                    sharing photos of your parking area.
-                                </p>
-                                <button
-                                    type="button"
-                                    class="btn-ghost text-white text-sm hover:bg-white/10 hover:text-white inset-0 before:hidden"
-                                >
-                                    <Upload size={16} class="inline mr-2" />
-                                    Choose Files
-                                </button>
-                            </div>
-
-                            <div class="bg-white/10 p-4 rounded-2xl">
-                                <div class="flex items-start gap-3">
-                                    <Map
-                                        class="w-5 h-5 text-[#3B5998] flex-shrink-0 mt-0.5"
-                                    />
-                                    <div>
-                                        <p
-                                            class="text-white text-sm font-semibold mb-1 font-body"
-                                        >
-                                            Drop a Pin
-                                        </p>
-                                        <p
-                                            class="text-gray-400 text-xs font-body"
-                                        >
-                                            You can also share your location or
-                                            drop a pin on the map for easier
-                                            navigation to your property.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="flex gap-3 pt-4">
-                                <button
-                                    type="button"
-                                    on:click={() => (step = 2)}
                                     class="btn-ghost text-white flex-1 hover:bg-white/10 hover:text-white inset-0 before:hidden"
                                     >Back</button
                                 >
