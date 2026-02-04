@@ -16,9 +16,9 @@ export const galleryCategories: GalleryCategory[] = [
             '/line striping/sp-23.jpeg',
             '/line striping/sp-24.jpeg',
             '/line striping/sp-30.jpeg',
-            '/line striping/sp-32.jpeg',
             '/line striping/sp-33.jpeg',
-            '/line striping/sp-34.jpeg'
+            '/line striping/sp-37.jpeg',
+            '/line striping/sp-65.jpeg'
         ]
     },
     {
