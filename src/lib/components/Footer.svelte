@@ -215,10 +215,21 @@
             <div
                 class="pt-8 border-t border-[#1E2A3B] flex flex-col md:flex-row items-center justify-between gap-4"
             >
-                <span class="text-[#6B7280] text-sm font-body"
-                    >© 2026 S&P Line Striping & Asphalt Sealcoating. All rights
-                    reserved.</span
-                >
+                <div class="flex flex-col items-center md:items-start gap-1">
+                    <span class="text-[#6B7280] text-sm font-body"
+                        >© 2026 S&P Line Striping & Asphalt Sealcoating. All
+                        rights reserved.</span
+                    >
+                    <span class="text-[#6B7280] text-xs font-body">
+                        Site built by <a
+                            href="https://www.polancoadvertising.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="hover:bg-black hover:text-white px-2 py-0.5 rounded transition-all"
+                            >Polanco Advertising</a
+                        >
+                    </span>
+                </div>
                 <div class="flex items-center gap-6">
                     <a
                         href="/privacy-policy"
