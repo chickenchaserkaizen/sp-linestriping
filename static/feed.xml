@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>S&P Line Striping & Sealcoating</title>
+  <subtitle>Professional line striping, sealcoating, and ADA-compliant markings for the Central Valley.</subtitle>
+  <link href="https://www.spstriping.com" rel="alternate" />
+  <link href="https://www.spstriping.com/feed.xml" rel="self" />
+  <id>https://www.spstriping.com/feed.xml</id>
+  <updated>2025-03-09T12:00:00-07:00</updated>
+  <author>
+    <name>S&P Line Striping and Sealcoating</name>
+    <email>spstripingfresno@gmail.com</email>
+  </author>
+  <entry>
+    <title>Line Striping Services</title>
+    <link href="https://www.spstriping.com/#service-line-striping" rel="alternate" />
+    <id>https://www.spstriping.com/#service-line-striping</id>
+    <updated>2025-03-09T12:00:00-07:00</updated>
+    <summary>Fresh, crisp lines that define your space and direct traffic flow with precision. Parking lot striping, new layout design, re-striping, and color-coded markings for businesses and properties throughout Fresno and the Central Valley.</summary>
+  </entry>
+  <entry>
+    <title>ADA + Fire Compliance</title>
+    <link href="https://www.spstriping.com/#service-ada-fire-compliance" rel="alternate" />
+    <id>https://www.spstriping.com/#service-ada-fire-compliance</id>
+    <updated>2025-03-09T12:00:00-07:00</updated>
+    <summary>Full compliance with ADA and fire lane standards for accessible, safe parking. ADA-compliant accessible parking spaces, fire lane markings, and regulatory signage to meet California code requirements.</summary>
+  </entry>
+  <entry>
+    <title>Seal Coating</title>
+    <link href="https://www.spstriping.com/#service-seal-coating" rel="alternate" />
+    <id>https://www.spstriping.com/#service-seal-coating</id>
+    <updated>2025-03-09T12:00:00-07:00</updated>
+    <summary>Protective coating that extends pavement life and restores that like-new black finish. Asphalt seal coating to protect and extend the life of parking lots, driveways, and commercial surfaces.</summary>
+  </entry>
+  <entry>
+    <title>Crack Filling</title>
+    <link href="https://www.spstriping.com/#service-crack-filling" rel="alternate" />
+    <id>https://www.spstriping.com/#service-crack-filling</id>
+    <updated>2025-03-09T12:00:00-07:00</updated>
+    <summary>Stop cracks before they spread. Hot-pour crack sealing for lasting repairs. Professional crack repair to prevent water damage and extend pavement life.</summary>
+  </entry>
+  <entry>
+    <title>Signage</title>
+    <link href="https://www.spstriping.com/#service-signage" rel="alternate" />
+    <id>https://www.spstriping.com/#service-signage</id>
+    <updated>2025-03-09T12:00:00-07:00</updated>
+    <summary>Professional pavement markings, directional arrows, and custom stencils. Custom signage including traffic signs, directional signs, and property identification.</summary>
+  </entry>
+  <entry>
+    <title>Recreational Courts</title>
+    <link href="https://www.spstriping.com/#service-recreational-courts" rel="alternate" />
+    <id>https://www.spstriping.com/#service-recreational-courts</id>
+    <updated>2025-03-09T12:00:00-07:00</updated>
+    <summary>Basketball, tennis, pickleball—precision court striping for sports facilities. Court markings for tennis, basketball, pickleball, and multi-sport facilities.</summary>
+  </entry>
+  <entry>
+    <title>Customer Review: Mitesh Gajjar</title>
+    <link href="https://www.spstriping.com/#testimonials" rel="alternate" />
+    <id>https://www.spstriping.com/#testimonials-mitesh</id>
+    <updated>2025-03-09T12:00:00-07:00</updated>
+    <summary>5-star review: "S&P - Line Striping and Sealcoating did an excellent job for our gym. Their team was both professional and courteous. They paid great attention to detail, ensuring that all lines were accurately drawn..."</summary>
+  </entry>
+  <entry>
+    <title>Customer Review: Eric Stoner</title>
+    <link href="https://www.spstriping.com/#testimonials" rel="alternate" />
+    <id>https://www.spstriping.com/#testimonials-eric</id>
+    <updated>2025-03-09T12:00:00-07:00</updated>
+    <summary>5-star review: "I highly recommend S&P line striping. They are very responsive and easy to work with. They didn't sell us anything we didn't need, were honest and straight to the point..."</summary>
+  </entry>
+  <entry>
+    <title>Customer Review: Max Lor</title>
+    <link href="https://www.spstriping.com/#testimonials" rel="alternate" />
+    <id>https://www.spstriping.com/#testimonials-max</id>
+    <updated>2025-03-09T12:00:00-07:00</updated>
+    <summary>5-star review: "First and foremost I would like to state how professional this company is when it came to communication and planning. Pricing for striping was extremely reasonable compared to other companies..."</summary>
+  </entry>
+</feed>

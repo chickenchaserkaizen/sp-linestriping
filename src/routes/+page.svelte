@@ -101,58 +101,68 @@
 </script>
 
 <div class="min-h-screen bg-[#FAF8F5]">
-    <Navigation
-        {scrolledPastHero}
-        {isMenuOpen}
-        on:toggleMenu={() => (isMenuOpen = !isMenuOpen)}
-        on:closeMenu={() => (isMenuOpen = false)}
-        on:scrollToHero={() => scrollToSection(heroSection)}
-        on:scrollToServices={() => scrollToSection(servicesSection)}
-        on:scrollToTestimonials={() => scrollToSection(testimonialsSection)}
-        on:scrollToContact={() => scrollToSection(contactSection)}
-        on:scrollToId={(e) => scrollToId(e.detail)}
-        on:openEstimate={() => (isEstimateOpen = true)}
-    />
+    <header>
+        <Navigation
+            {scrolledPastHero}
+            {isMenuOpen}
+            on:toggleMenu={() => (isMenuOpen = !isMenuOpen)}
+            on:closeMenu={() => (isMenuOpen = false)}
+            on:scrollToHero={() => scrollToSection(heroSection)}
+            on:scrollToServices={() => scrollToSection(servicesSection)}
+            on:scrollToTestimonials={() => scrollToSection(testimonialsSection)}
+            on:scrollToContact={() => scrollToSection(contactSection)}
+            on:scrollToId={(e) => scrollToId(e.detail)}
+            on:openEstimate={() => (isEstimateOpen = true)}
+        />
+    </header>
 
-    <Hero
-        bind:section={heroSection}
-        on:openEstimate={() => (isEstimateOpen = true)}
-        on:scrollToWork={() => scrollToId("our-work")}
-    />
+    <main>
+        <Hero
+            bind:section={heroSection}
+            on:openEstimate={() => (isEstimateOpen = true)}
+            on:scrollToWork={() => scrollToId("our-work")}
+        />
 
-    <Services
-        bind:section={servicesSection}
-        on:scrollToContact={() => scrollToSection(contactSection)}
-        on:scrollToWork={() => scrollToId("our-work")}
-        on:scrollToId={(e) => scrollToId(e.detail)}
-    />
+        <Services
+            bind:section={servicesSection}
+            on:scrollToContact={() => scrollToSection(contactSection)}
+            on:scrollToWork={() => scrollToId("our-work")}
+            on:scrollToId={(e) => scrollToId(e.detail)}
+        />
 
-    <Testimonials bind:section={testimonialsSection} />
+        <Testimonials bind:section={testimonialsSection} />
 
-    <Gallery on:openLightbox={(e) => openLightbox(e.detail)} />
+        <Gallery on:openLightbox={(e) => openLightbox(e.detail)} />
 
-    <Process
-        bind:section={processSection}
-        on:openEstimate={() => (isEstimateOpen = true)}
-    />
+        <Process
+            bind:section={processSection}
+            on:openEstimate={() => (isEstimateOpen = true)}
+        />
 
-    <Coverage bind:section={coverageSection} />
+        <Coverage bind:section={coverageSection} />
 
-    <Contact bind:section={contactSection} />
+        <Contact bind:section={contactSection} />
+    </main>
 
-    <Footer
-        on:scrollToHero={() => scrollToSection(heroSection)}
-        on:scrollToServices={() => scrollToSection(servicesSection)}
-        on:scrollToProcess={() => scrollToSection(processSection)}
-        on:scrollToTestimonials={() => scrollToSection(testimonialsSection)}
-        on:scrollToContact={() => scrollToSection(contactSection)}
-        on:scrollToWork={() => scrollToId("our-work")}
-    />
+    <footer>
+        <Footer
+            on:scrollToHero={() => scrollToSection(heroSection)}
+            on:scrollToServices={() => scrollToSection(servicesSection)}
+            on:scrollToProcess={() => scrollToSection(processSection)}
+            on:scrollToTestimonials={() => scrollToSection(testimonialsSection)}
+            on:scrollToContact={() => scrollToSection(contactSection)}
+            on:scrollToWork={() => scrollToId("our-work")}
+        />
+    </footer>
 
-    <Lightbox image={lightboxImage} on:close={closeLightbox} />
+    <div aria-hidden="true">
+        <Lightbox image={lightboxImage} on:close={closeLightbox} />
+    </div>
 
-    <EstimateDialog
-        isOpen={isEstimateOpen}
-        on:close={() => (isEstimateOpen = false)}
-    />
+    <div aria-hidden="true">
+        <EstimateDialog
+            isOpen={isEstimateOpen}
+            on:close={() => (isEstimateOpen = false)}
+        />
+    </div>
 </div>

@@ -8,12 +8,12 @@
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: "S&P Line Striping & Sealcoating",
-    image: "https://spstriping.com/logo.png",
+    image: "https://www.spstriping.com/logo.png",
     description:
       "Professional line striping, sealcoating, and ADA-compliant markings for the Central Valley",
     telephone: "+1-559-704-3141",
     email: "spstripingfresno@gmail.com",
-    url: "https://spstriping.com",
+    url: "https://www.spstriping.com",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Fresno",
@@ -104,7 +104,7 @@
   />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="/logo.png" />
-  <meta property="og:url" content="https://spstriping.com" />
+  <meta property="og:url" content="https://www.spstriping.com" />
   <meta property="og:site_name" content="S&P Line Striping" />
 
   <!-- Twitter Card -->
@@ -115,6 +115,12 @@
     content="Professional line striping and sealcoating services for the Central Valley."
   />
   <meta name="twitter:image" content="/logo.png" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://www.spstriping.com" />
+
+  <!-- Feed Discovery -->
+  <link rel="alternate" type="application/atom+xml" title="S&P Line Striping Feed" href="https://www.spstriping.com/feed.xml" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/logo.png" />
